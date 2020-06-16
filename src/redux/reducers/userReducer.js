@@ -3,11 +3,13 @@ import {
   SET_AUTHENTICATED,
   SET_UNAUTHENTICATED,
   LOADING_USER,
+  SEND_INVITE
 } from '../types';
 
 const initialState = {
   authenticated: false,
   credentials: {},
+  invitation:{},
 };
 
 export default function(state = initialState, action) {
@@ -25,6 +27,12 @@ export default function(state = initialState, action) {
         loading: false,
         ...action.payload
       };
+      case SEND_INVITE:
+        return {
+          authenticated: true,
+          loading: false,
+          invitation:action.payload
+        };
     case LOADING_USER:
       return {
         ...state,

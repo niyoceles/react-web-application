@@ -5,7 +5,6 @@ import {
   MDBCol,
   MDBInput,
   MDBBtn,
-  MDBTypography,
 } from 'mdbreact';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -90,9 +89,9 @@ class Login extends Component {
               </div>
               <div className='text-center'>
                 {errors.general && (
-                  <MDBTypography variant='h6' colorText='pink'>
+                  <div className="error">
                     {errors.general}
-                  </MDBTypography>
+                  </div>
                 )}
                 <MDBBtn color='primary' type='submit'>
                   Login
