@@ -5,7 +5,9 @@ import {
   CLEAR_ERRORS,
   LOADING_UI,
   SET_UNAUTHENTICATED,
-  SEND_INVITE
+  SEND_INVITE,
+  SUBMIT_EMAIL,
+  RESET_PASSWORD
 } from '../types';
 import axios from 'axios';
 
@@ -39,6 +41,35 @@ export const sendAnInvite = (sendInviteData) => dispatch => {
       dispatch({ type: SET_ERRORS, payload: err.response.data.errors });
     });
 };
+
+export const forgetPassword = (sendEmail) => dispatch => {
+  dispatch({ type: LOADING_UI });
+  axios
+    .post('https://europe-west1-inlove-46f42.cloudfunctions.net/api/signup', sendEmail)
+    .then(res => {
+      setAuthorization(res.data.token);
+      dispatch({ type: CLEAR_ERRORS });
+      dispatch({ type: SUBMIT_EMAIL, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: SET_ERRORS, payload: err.response.data.errors });
+    });
+};
+
+export const resetPassword = (sendEmail) => dispatch => {
+  dispatch({ type: LOADING_UI });
+  axios
+    .post('https://europe-west1-inlove-46f42.cloudfunctions.net/api/signup', sendEmail)
+    .then(res => {
+      setAuthorization(res.data.token);
+      dispatch({ type: CLEAR_ERRORS });
+      dispatch({ type: RESET_PASSWORD, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: SET_ERRORS, payload: err.response.data.errors });
+    });
+};
+
 
 export const setAuthorization = token => {
   const fBIdToken = `Bearer ${token}`;

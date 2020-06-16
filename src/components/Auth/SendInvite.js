@@ -4,7 +4,7 @@ import {
   MDBInput,
   MDBBtn,
 } from 'mdbreact';
-import Validator from '../../utils/sendInvation';
+import Validator from '../../utils/validation';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { sendAnInvite } from '../../redux/actions';
