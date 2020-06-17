@@ -11,16 +11,16 @@ import {
   MDBCardText,
 } from 'mdbreact';
 import Navbar from '../layouts/Navbar';
-import ResetPassword from '../components/Auth/ResetPassword';
+import CreateArticle from '../components/Articles/CreateArticle';
 
-const ResetPasswordPage = () => {
+const CreateArticlePage = () => {
   return (
     <Fragment>
       <Navbar />
       <MDBContainer style={{ padding: '1rem' }}>
         <MDBRow>
-          <MDBCol md='6' className='pull-left'>
-            <MDBCard style={{ width: '25rem' }}>
+          <MDBCol md='4' className='pull-left'>
+            <MDBCard style={{ width: '20rem' }}>
               <MDBCardImage
                 className='img-fluid'
                 src='https://mdbootstrap.com/img/Photos/Others/images/43.jpg'
@@ -36,10 +36,10 @@ const ResetPasswordPage = () => {
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
-          <ResetPassword />
+          <CreateArticle />
         </MDBRow>
       </MDBContainer>
     </Fragment>
   );
 };
-export default ResetPasswordPage;
+export default CreateArticlePage;

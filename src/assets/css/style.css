@@ -228,3 +228,20 @@ ul li {
   display: block !important;
  }
 }
+
+.cover {
+  height: 8px;
+  width: 100px;
+}
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* .col {
+  padding: 1rem;
+  background-color: #33b5e5;
+  border: 2px solid #fff;
+  color: #fff;
+  text-align: center;
+  } */

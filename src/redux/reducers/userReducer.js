@@ -1,23 +1,34 @@
 import {
   SET_USER,
+  SET_USERS,
+  LOADING_DATA,
   SET_AUTHENTICATED,
   SET_UNAUTHENTICATED,
   LOADING_USER,
   SEND_INVITE,
   RESET_PASSWORD,
+  CREATE_PASSWORD,
   SUBMIT_EMAIL
 } from '../types';
 
 const initialState = {
+  users: [],
   authenticated: false,
   credentials: {},
   invitation:{},
   sentEmail:'',
+  createPwd:'',
   resetPwd:'',
+  loading: false,
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case LOADING_DATA:
+      return {
+        ...state,
+        loading: true
+      };
     case SET_AUTHENTICATED:
       return {
         ...state,
@@ -25,6 +36,12 @@ export default function(state = initialState, action) {
       };
     case SET_UNAUTHENTICATED:
       return initialState;
+    case SET_USERS:
+      return {
+        ...state,
+        users: action.payload,
+        loading: false
+      };
     case SET_USER:
       return {
         authenticated: true,
@@ -42,6 +59,12 @@ export default function(state = initialState, action) {
           authenticated: true,
           loading: false,
           sendEmail:action.payload
+        };
+      case CREATE_PASSWORD:
+        return {
+          authenticated: true,
+          loading: false,
+          createPwd:action.payload
         };
       case RESET_PASSWORD:
         return {
