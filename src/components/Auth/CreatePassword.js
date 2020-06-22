@@ -8,9 +8,9 @@ import { Link } from 'react-router-dom';
 import Validator from '../../utils/validation';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { resetPassword } from '../../redux/actions';
+import { createPassword } from '../../redux/actions';
 
-class ResetPassword extends Component {
+class CreatePassword extends Component {
   state = {
     password: '',
     confirmPassword:'',
@@ -44,10 +44,10 @@ class ResetPassword extends Component {
       return this.displayError(confirmPasswordError, 'confirmPasswordError');
     }
     const token = window.location.search.substring(1);
-    const resetPwdData = {
+    const createPasswordData = {
       password, names, token
     };
-    this.props.ResetPassword(resetPwdData);
+    this.props.CreatePassword(createPasswordData);
   };
 
   displayError = (error, key) => {
@@ -69,7 +69,7 @@ class ResetPassword extends Component {
     return (
           <MDBCol md='6' className="pull-right">
             <form onSubmit={this.handleSubmit}>
-              <p className='h4 text-center mb-8'>Reset your password</p>
+              <p className='h4 text-center mb-8'>Create your password</p>
               <div className='grey-text'>
                 <MDBInput 
                 id='password'
@@ -109,7 +109,7 @@ class ResetPassword extends Component {
                 {passwordError && <div className="error">{passwordError}</div>}
               </div>
                 <MDBBtn color='primary' type='submit'>
-                  Reset&nbsp;Password
+                  Create&nbsp;Password
                 </MDBBtn>
                 <br />
                 <small>
@@ -126,8 +126,8 @@ class ResetPassword extends Component {
   }
 }
 
-ResetPassword.propTypes = {
-  resetPassword: PropTypes.func.isRequired,
+CreatePassword.propTypes = {
+  createPassword: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   UI: PropTypes.object.isRequired,
 };
@@ -137,4 +137,4 @@ const mapStateToProps = state => ({
   UI: state.UI,
 });
 
-export default connect(mapStateToProps, {resetPassword})(ResetPassword);
+export default connect(mapStateToProps, {createPassword})(CreatePassword);

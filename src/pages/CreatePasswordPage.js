@@ -11,9 +11,9 @@ import {
   MDBCardText,
 } from 'mdbreact';
 import Navbar from '../layouts/Navbar';
-import ResetPassword from '../components/Auth/ResetPassword';
+import CreatePassword from '../components/Auth/CreatePassword';
 
-const ResetPasswordPage = () => {
+const CreatePasswordPage = () => {
   return (
     <Fragment>
       <Navbar />
@@ -36,10 +36,10 @@ const ResetPasswordPage = () => {
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
-          <ResetPassword />
+          <CreatePassword />
         </MDBRow>
       </MDBContainer>
     </Fragment>
   );
 };
-export default ResetPasswordPage;
+export default CreatePasswordPage;
