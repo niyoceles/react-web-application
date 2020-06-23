@@ -1,20 +1,28 @@
 import React, { Component, Fragment } from 'react';
-import { MDBCol, MDBInput, MDBBtn,MDBContainer,MDBRow, MDBModal, MDBModalBody, 
-  MDBModalHeader, MDBModalFooter, MDBIcon } from 'mdbreact';
+import Modal from 'react-bootstrap/Modal';
+import ModalDialog from 'react-bootstrap/ModalDialog';
+import ModalHeader from 'react-bootstrap/ModalHeader';
+import ModalTitle from 'react-bootstrap/ModalTitle';
+import ModalBody from 'react-bootstrap/ModalBody';
+import ModalFooter from 'react-bootstrap/ModalFooter';
+import InputGroup from 'react-bootstrap/InputGroup';
+import FormControl from 'react-bootstrap/FormControl';
+import Upload from '../../helpers/upload/Upload';
+import Button from 'react-bootstrap/Button';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-inline';
-import editorConfigs from '../../helpers/ckEditorConfig';
+// import editorConfigs from '../../helpers/ckEditorConfig';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { updateArticle } from '../../redux/actions';
 
 class UpdateArticle extends Component {
   state = {
-    title: '',
-    category: '',
-    file: '',
-    text: '',
-    selectedFile: null,
+    title: this.props.articleName,
+    category: this.props.category,
+    file: this.props.contentFile,
+    text: this.props.contentText,
+    selectedFile: this.props.contentFile,
   };
 
   handleOpen = () => {
@@ -51,83 +59,76 @@ class UpdateArticle extends Component {
   };
 
   render() {
-    const { file, category, title, text, selectedFile, fileImg } = this.state;
-    if (selectedFile) {
-      if (selectedFile.type.startsWith('image')) {
-        console.log('Image file');
-      }
-    }
+    const { file, category, title, text, selectedFile } = this.state;
+    // if (selectedFile) {
+    //   if (selectedFile.type.startsWith('image')) {
+    //     console.log('Image file');
+    //   }
+    // }
     return (
       <Fragment>
-      <MDBBtn rounded outline size="sm" onClick={this.handleOpen}><MDBIcon icon="edit" className="indigo-text pr-3" /></MDBBtn>
-       <MDBModal isOpen={this.state.open} toggle={this.handleClose} size="lg">
-       <MDBModalHeader toggle={this.handleClose}>Are you sure you want to delete this star?</MDBModalHeader>
-        <MDBModalBody>
-         <MDBRow>
+      <Button variant="primary" onClick={this.handleOpen} className="pull-left">
+        Edit
+      </Button>
+       <Modal show={this.state.open} onHide={this.handleClose} size="lg">
+        <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+        Update an article
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>    
         <form onSubmit={this.handleSubmit}>
-          <p className='h4 text-center mb-8'>Update an article</p>
-          <div className='grey-text'>
-            <div style={{ paddingBottom: 15 }}>
-            <h5>Choose category of content</h5>
-              <select
-                className='browser-default custom-select'
-                name='category'
-                value={category}
-                onChange={this.handleChange}
-              >
-                <option>Choose your category</option>
-                <option value='1'>Written article</option>
-                <option value='2'>Video</option>
-                <option value='3'>Audio</option>
-              </select>
-            </div>
-            
-            <MDBInput
-              id='title'
+        <div className='container'>
+        <Upload />
+      </div>
+      <div style={{ paddingBottom: 15 }}>
+        <h5>Choose category of content</h5>
+        <select
+          className='browser-default custom-select'
+          name='category'
+          value={category}
+          onChange={this.handleChange}>
+          <option value={category}>{category}</option>
+          <option value='1adee4dc94b447a5949feaa6cc7d277e'>
+            Written article
+          </option>
+          <option value='2'>Video</option>
+          <option value='3'>Audio</option>
+        </select>
+      </div>
+
+      <div className='articleCreationSD'>
+        <div className='textContent' style={{ paddingTop: 20 }}>
+          <InputGroup>
+            <InputGroup.Prepend>
+              <InputGroup.Text>Article title</InputGroup.Text>
+            </InputGroup.Prepend>
+            <FormControl
+              as='textarea'
               name='title'
-              label='Type title of an article'
-              icon='blog'
-              group
-              type='text'
-              validate
-              error='wrong'
-              success='right'
               value={title}
               onChange={this.handleChange}
-              required
+              aria-label='With textarea'
             />
-
-            <div className='input-group' style={{paddingBottom:20}}>
-              <div className='input-group-prepend'>
-                <span className='input-group-text' id='inputGroupFileAddon01'>
-                  Upload file
-                </span>
-                <span className='input-group-text' id='inputGroupFileAddon01'>
-                <input type="file" name="file" onChange={this.onChangeHandler}/>
-              </span>
-              </div>
-            </div>
-            <br/>
-            <div className="textContent" style={{paddingTop:20}}>
-            <CKEditor
-              editor={ClassicEditor}
-              data={text}
-              onChange={(event, editor) => {
-                const data = editor.getData();
-                this.setState({ text: data });
-              }}
-              // config={editorConfigs}
-            />
-          </div>
-          </div>
-        </form>
-      </MDBRow>
-      </MDBModalBody>
-      <MDBModalFooter>
-        <MDBBtn color="secondary" onClick={this.handleClose}>Close</MDBBtn>
-        <MDBBtn color="primary" onClick={this.handleSubmit}>Save changes</MDBBtn>
-      </MDBModalFooter>
-     </MDBModal>
+          </InputGroup>
+          <CKEditor
+            editor={ClassicEditor}
+            data={text}
+            onChange={(event, editor) => {
+              const data = editor.getData();
+              this.setState({ text: data });
+            }}
+            // config={editorConfigs}
+          />
+        </div>
+      </div>
+      </form>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button color="secondary" onClick={this.handleClose}>Close</Button>
+        <Button color="primary" onClick={this.handleSubmit}>Save changes</Button>
+        </Modal.Footer>
+      </Modal>
     </Fragment>
     );
   }

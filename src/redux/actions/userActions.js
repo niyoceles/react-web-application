@@ -12,7 +12,7 @@ import {
   CREATE_PASSWORD,
   SET_USERS,
   SET_USER,
-  DELETE_USER
+  DELETE_USER,
 } from '../types';
 import axios from 'axios';
 
@@ -24,22 +24,27 @@ export const loginUser = (userData, history) => dispatch => {
     .post('http://api.nurc.bict.rw/login/', userData)
     .then(res => {
       console.log('login:', res.data);
-      setAuthorization(res.data.token);
+      const { token, role } = res.data;
+      setAuthorization(token, role);
       // dispatch(getUserData());
       dispatch({ type: CLEAR_ERRORS });
-      history.push('/'); //redirect to the home page
+      history.push('/dashboard'); //redirect to the home page
     })
     .catch(err => {
-      dispatch({ type: SET_ERRORS, payload: err.response.data.errors });
+      dispatch({ type: SET_ERRORS, payload: err.response });
     });
 };
 
-export const sendAnInvite = (sendInviteData) => dispatch => {
+export const sendAnInvite = sendInviteData => dispatch => {
   dispatch({ type: LOADING_UI });
   axios
-    .post('https://europe-west1-inlove-46f42.cloudfunctions.net/api/signup', sendInviteData)
+    .post(
+      'http://api.nurc.bict.rw/register/',
+      sendInviteData
+    )
     .then(res => {
-      setAuthorization(res.data.token);
+      // setAuthorization(res.data.token);
+      console.log(res.data);
       dispatch({ type: CLEAR_ERRORS });
       dispatch({ type: SEND_INVITE, payload: res.data });
     })
@@ -48,10 +53,13 @@ export const sendAnInvite = (sendInviteData) => dispatch => {
     });
 };
 
-export const forgetPassword = (sendEmail) => dispatch => {
+export const forgetPassword = sendEmail => dispatch => {
   dispatch({ type: LOADING_UI });
   axios
-    .post('https://europe-west1-inlove-46f42.cloudfunctions.net/api/signup', sendEmail)
+    .post(
+      'https://europe-west1-inlove-46f42.cloudfunctions.net/api/signup',
+      sendEmail
+    )
     .then(res => {
       setAuthorization(res.data.token);
       dispatch({ type: CLEAR_ERRORS });
@@ -62,10 +70,13 @@ export const forgetPassword = (sendEmail) => dispatch => {
     });
 };
 
-export const resetPassword = (sendEmail) => dispatch => {
+export const resetPassword = sendEmail => dispatch => {
   dispatch({ type: LOADING_UI });
   axios
-    .post('https://europe-west1-inlove-46f42.cloudfunctions.net/api/signup', sendEmail)
+    .post(
+      'https://europe-west1-inlove-46f42.cloudfunctions.net/api/signup',
+      sendEmail
+    )
     .then(res => {
       setAuthorization(res.data.token);
       dispatch({ type: CLEAR_ERRORS });
@@ -76,10 +87,13 @@ export const resetPassword = (sendEmail) => dispatch => {
     });
 };
 
-export const createPassword = (passwordData) => dispatch => {
+export const createPassword = passwordData => dispatch => {
   dispatch({ type: LOADING_UI });
   axios
-    .post('https://europe-west1-inlove-46f42.cloudfunctions.net/api/signup', passwordData)
+    .post(
+      'https://europe-west1-inlove-46f42.cloudfunctions.net/api/signup',
+      passwordData
+    )
     .then(res => {
       setAuthorization(res.data.token);
       dispatch({ type: CLEAR_ERRORS });
@@ -90,16 +104,16 @@ export const createPassword = (passwordData) => dispatch => {
     });
 };
 
-
-export const setAuthorization = token => {
-  const fBIdToken = `Token ${token}`;
-  localStorage.setItem('fBIdToken', fBIdToken);
+export const setAuthorization = (token, role) => {
+  const nurcToken = `Token ${token}`;
+  localStorage.setItem('nurcToken', nurcToken);
+  localStorage.setItem('nurcRole', role);
   //seting authorization to the header axios
-  axios.defaults.headers.common['Authorization'] = fBIdToken;
+  axios.defaults.headers.common['Authorization'] = nurcToken;
 };
 
 export const logoutUser = () => dispatch => {
-  localStorage.removeItem('fBIdToken');
+  localStorage.removeItem('nurcToken');
   delete axios.defaults.headers.common['Authorization'];
   dispatch({ type: SET_UNAUTHENTICATED });
 };
@@ -122,17 +136,16 @@ export const getUsers = () => dispatch => {
     .then(res => {
       dispatch({
         type: SET_USERS,
-        payload: res.data
+        payload: res.data,
       });
     })
     .catch(err => {
       dispatch({
         type: SET_ERRORS,
-        payload: []
+        payload: [],
       });
     });
 };
-
 
 export const deleteUser = postId => dispatch => {
   axios
@@ -150,14 +163,14 @@ export const updateUser = newPost => dispatch => {
     .then(res => {
       dispatch({
         type: SET_USER,
-        payload: res.data
+        payload: res.data,
       });
       // dispatch(clearErrors());
     })
     .catch(err => {
       dispatch({
         type: SET_ERRORS,
-        payload: err.response.data.errors
+        payload: err.response.data.errors,
       });
     });
 };

@@ -1,4 +1,4 @@
-export * from './auth/login.js';
+export * from './auth/LoginScreen.js';
 export * from './auth/password/forgot.js';
 export * from './auth/password/reset.js';
 export * from './auth/password/set.js';

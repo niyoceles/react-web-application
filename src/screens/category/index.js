@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Container, Col, Button, Table } from 'react-bootstrap';
 
-import { AdminLayout } from '../../layouts';
+import AdminLayout from '../../layouts/AdminLayout';
 
 export class CategoryScreen extends React.Component
 {
@@ -34,8 +34,8 @@ export class CategoryScreen extends React.Component
                                     <td className="text-center">{ i + 1 }</td>
                                     <td>Article</td>
                                     <td>
-                                        <a href="" className="btn btn-primary btn-sm mr-2 small"><i class="fa fa-edit"></i></a>
-                                        <a href="" className="btn btn-danger btn-sm small"><i class="fa fa-trash"></i></a>
+                                        <a href="" className="btn btn-primary btn-sm mr-2 small"><i className="fa fa-edit"></i></a>
+                                        <a href="" className="btn btn-danger btn-sm small"><i className="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                             )}

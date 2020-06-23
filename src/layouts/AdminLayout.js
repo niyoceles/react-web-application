@@ -3,7 +3,7 @@ import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
 import './css/admin.css';
 
-export class AdminLayout extends React.Component
+class AdminLayout extends React.Component
 {
 	render() {
 		return (
@@ -13,7 +13,6 @@ export class AdminLayout extends React.Component
 		                <Container>
 		                    <Navbar.Toggle aria-controls="navBarMenu" />
 		                    <Navbar.Brand href="/dashboard">NURC</Navbar.Brand>
-
 		                    <Navbar.Collapse id="navBarMenu">
 		                        <Nav className="ml-auto">
 		                        	<NavDropdown title="NIYITEGEKA Honore">
@@ -42,3 +41,5 @@ export class AdminLayout extends React.Component
 		);
 	}
 }
+
+export default AdminLayout;
