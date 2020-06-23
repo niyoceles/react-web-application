@@ -49,22 +49,15 @@ class Login extends Component {
     return (
       <MDBContainer>
         <MDBRow>
-          <MDBCol>
-            <img
-              src='https://mdbootstrap.com/img/Others/documentation/img%20(75)-mini.jpg'
-              alt='thumbnail'
-              className='img-thumbnail'
-            />
-          </MDBCol>
           <MDBCol md='12'>
             <form onSubmit={this.handleSignin}>
-              <p className='h2 text-center mb-8'>Sign in</p>
-              <div className='grey-text'>
+              <div className='dark-text black-text'>
                 <MDBInput
                   id='email'
                   name='email'
                   label='Type your email'
                   icon='envelope'
+                  containerClass="text-left"
                   group
                   type='email'
                   validate
@@ -93,15 +86,14 @@ class Login extends Component {
                     {errors.general}
                   </div>
                 )}
-                <MDBBtn color='primary' type='submit'>
+                <MDBBtn color='primary btn-block' type='submi'>
                   Login
                 </MDBBtn>
-                <br />
-                <small>
-                  <p className='h6 text-center mb-8'>
-                    Forgot password <Link to='/forget'>here</Link>
-                  </p>
-                </small>
+                <div class='mt-4 grey-text'>
+                  <span class='pull-left'>
+                    Forgot password ? <Link to='/forget'>here</Link>
+                  </span>
+                </div>
               </div>
             </form>
           </MDBCol>

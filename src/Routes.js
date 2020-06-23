@@ -1,32 +1,28 @@
 import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import LoginPage from './pages/LoginPage';
-import Home from './pages/Home.jsx';
-import ForgetPasswordPage from './pages/ForgetPasswordPage';
-import ResetPasswordPage from './pages/ResetPasswordPage';
-import CreateArticlePage from './pages/CreateArticlePage';
-import UpdateArticlePage from './pages/UpdateArticlePage';
-import ManageArticlesPage from './pages/ManageArticlesPage';
-import ManageUsersPage from './pages/ManageUsersPage';
-import CreatePasswordPage from './pages/CreatePasswordPage';
 
+import { LoginScreen, ForgotPasswordScreen, ResetPasswordScreen, SetPasswordScreen, DashboardScreen, ArticleScreen, CategoryScreen } from './screens';
 
-const Routes = () => (
-  <Router>
-    <Switch>
-      <Fragment>
-        <Route exact path='/' component={Home} />
-        <Route exact path='/login' component={LoginPage} />
-        <Route exact path='/forget' component={ForgetPasswordPage} />
-        <Route exact path='/reset-password' component={ResetPasswordPage} />
-        <Route exact path='/create' component={CreateArticlePage} />
-        <Route exact path='/update' component={UpdateArticlePage} />
-        <Route exact path='/users' component={ManageUsersPage} />
-        <Route exact path='/articles' component={ManageArticlesPage} />
-        <Route exact path='/create-account' component={CreatePasswordPage} />
-      </Fragment>
-    </Switch>
-  </Router>
-);
+export class Routes extends React.Component
+{
+    render() {
+        return (
+            <Router>
+                <Switch>
+                    <Fragment>
+                            <Route exact path='/login' component={LoginScreen} />
+                            <Route exact path='/password/forgot' component={ForgotPasswordScreen} />
+                            <Route exact path='/password/reset/:hash' component={ResetPasswordScreen} />
+                            <Route exact path='/password/set/:hash' component={SetPasswordScreen} />
 
-export default Routes;
+                            <Route exact path='/dashboard' component={DashboardScreen} />
+
+                            <Route exact path='/article' component={ArticleScreen} />
+
+                            <Route exact path='/category' component={CategoryScreen} />
+                    </Fragment>
+                </Switch>
+            </Router>
+        );
+    }
+}
