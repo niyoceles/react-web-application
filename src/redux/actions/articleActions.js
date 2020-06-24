@@ -36,9 +36,11 @@ export const addArticle = (newArticle,history) => dispatch => {
 export const updateArticle = (updateData, history) => dispatch => {
   axios.defaults.headers.common['Authorization'] ='Token 60756d77ba57d8de4ba99f2af2d4d04bb25cbb05';
   dispatch({ type: LOADING_UI });
+  console.log('dddddzzz', updateData)
   axios
-    .put(`${REACT_APP_BASE_URL}/article/update/`, updateData)
+    .post('http://api.nurc.bict.rw/article/update/', updateData)
     .then(res => {
+      console.log('resultz', res.data);
       dispatch({
         type: POST_ARTICLE,
         payload: res.data,

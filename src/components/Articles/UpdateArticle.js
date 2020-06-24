@@ -56,7 +56,7 @@ class UpdateArticle extends Component {
       file: selectedFile,
       text,
     };
-    this.props.addArticle(articleData, this.props.history);
+    this.props.updateArticle(articleData, this.props.history);
   };
 
   render() {
