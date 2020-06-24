@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import { SET_ERRORS, POST_ARTICLE,
-  LOADING_DATA, CLEAR_ERRORS, LOADING_UI, DELETE_ARTICLE,SET_ARTICLES } from '../types';
+  LOADING_DATA, CLEAR_ERRORS, LOADING_UI, DELETE_ARTICLE,SET_ARTICLES, CHANGE_ARTICLE_STATUS } from '../types';
 import axios from 'axios';
 import { setAuthorization } from './userActions';
 const { REACT_APP_BASE_URL } = process.env;
@@ -62,6 +62,16 @@ export const deleteArticle = articleId => dispatch => {
     .post('http://api.nurc.bict.rw/article/delete/', articleId)
     .then((res) => {
       dispatch({ type: DELETE_ARTICLE, payload: articleId.id });
+    })
+    .catch(err => console.log(err));
+};
+
+export const changeArticleStatus = (articleId, history) => dispatch => {
+  axios.defaults.headers.common['Authorization'] ='Token e81989f716e5d3068c90e98cf5af38851867b75f';
+  axios.post('http://api.nurc.bict.rw/article/status/', articleId)
+    .then((res) => {
+      history.push('/articles'); 
+      dispatch({ type: CHANGE_ARTICLE_STATUS, payload: articleId.id });
     })
     .catch(err => console.log(err));
 };

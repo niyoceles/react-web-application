@@ -68,9 +68,7 @@ class UpdateArticle extends Component {
     // }
     return (
       <Fragment>
-      <Button variant="primary" onClick={this.handleOpen} className="pull-left">
-        Edit
-      </Button>
+      <a href="#" onClick={this.handleOpen} className="btn btn-primary btn-sm mr-2 small"><i className="fa fa-edit"></i></a>
        <Modal show={this.state.open} onHide={this.handleClose} size="lg">
         <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">

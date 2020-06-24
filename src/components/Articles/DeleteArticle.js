@@ -35,9 +35,7 @@ class DeleteArticle extends Component {
 
     return (
       <Fragment>
-        <Button variant="danger" onClick={this.handleOpen} className="pull-right">
-        Delete
-      </Button>
+      <a href="#" onClick={this.handleOpen} className="btn btn-danger btn-sm small"><i className="fa fa-trash"></i></a>
         <Modal show={this.state.open} onHide={this.handleClose} size="lg">
           <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">

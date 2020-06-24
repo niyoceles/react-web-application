@@ -8,6 +8,7 @@ import { Row, Container, Col, Button, ButtonGroup, Table, Dropdown } from 'react
 import DeleteArticle from './DeleteArticle';
 import UpdateArticle from './UpdateArticle';
 import { connect } from 'react-redux';
+import ChangeArticleStatus from './ChangeArticleStatus';
 
 class ManageArticles extends Component {
   render() {
@@ -41,7 +42,16 @@ class ManageArticles extends Component {
           <td>{title}</td>
           <td>{category}</td>
           <td>{user}</td>
-          <td>{status?('Active') : ('Deactive')}</td>
+          <td style={{display:'block', width:'190px'}}>
+          <ChangeArticleStatus
+          articleId={id}
+          userNames={user}
+          articleStatus={status}
+          articleName={title}
+          contentText={text}
+        />
+        {status?('Active') : ('Deactive')}
+        </td>
           <td>{dayjs(created_at).fromNow()}</td>
           <td>
             <Dropdown>
@@ -72,6 +82,7 @@ class ManageArticles extends Component {
             articleName={title}
             contentText={text}
           />
+          
           </td>
         </tr>
       </tbody>
