@@ -35,21 +35,24 @@ export const loginUser = (userData, history) => dispatch => {
     });
 };
 
-export const sendAnInvite = sendInviteData => dispatch => {
+export const sendAnInvite = (sendInviteData, history) => dispatch => {
+  axios.defaults.headers.common['Authorization'] ='Token e81989f716e5d3068c90e98cf5af38851867b75f';
   dispatch({ type: LOADING_UI });
+  console.log('data', sendInviteData)
   axios
     .post(
       'http://api.nurc.bict.rw/register/',
       sendInviteData
     )
     .then(res => {
-      // setAuthorization(res.data.token);
-      console.log(res.data);
+      console.log('my data', res.data);
+      history.push('/dashboard');
       dispatch({ type: CLEAR_ERRORS });
       dispatch({ type: SEND_INVITE, payload: res.data });
     })
     .catch(err => {
-      dispatch({ type: SET_ERRORS, payload: err.response.data.errors });
+      console.log(err.response)
+      dispatch({ type: SET_ERRORS, payload: err.response });
     });
 };
 
@@ -87,20 +90,18 @@ export const resetPassword = sendEmail => dispatch => {
     });
 };
 
-export const createPassword = passwordData => dispatch => {
+export const createAccountPassword = (passwordData, history) => dispatch => {
   dispatch({ type: LOADING_UI });
   axios
-    .post(
-      'https://europe-west1-inlove-46f42.cloudfunctions.net/api/signup',
-      passwordData
-    )
+    .post('http://api.nurc.bict.rw/setpassword/',passwordData)
     .then(res => {
-      setAuthorization(res.data.token);
+      setAuthorization(res.data.token, res.data.role);
       dispatch({ type: CLEAR_ERRORS });
       dispatch({ type: CREATE_PASSWORD, payload: res.data });
+      history.push('/dashboard'); //redirect to the home page
     })
     .catch(err => {
-      dispatch({ type: SET_ERRORS, payload: err.response.data.errors });
+      dispatch({ type: SET_ERRORS, payload: err.response});
     });
 };
 

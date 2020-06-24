@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
 import DeleteUser from '../Users/DeleteUser';
-import UpdateUser from '../Users/UpdateUser';
+// import UpdateUser from '../Users/UpdateUser';
 import { connect } from 'react-redux';
 
 class Users extends Component {
@@ -45,11 +45,11 @@ class Users extends Component {
 							userNames={userName}
 							contextText={dayjs(createAt).fromNow()}
 						/>
-						<UpdateUser
+						{/*<UpdateUser
 							articleId={postId}
 							userNames={userName}
 							contextText={dayjs(createAt).fromNow()}
-						/>
+						/>*/}
 					</td>
 				</tr>
 			</tbody>

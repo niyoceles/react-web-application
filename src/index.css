@@ -103,7 +103,21 @@ p.small {
 	background-color: #fff;
 }
 
-Button{
+/* Button{
 	display: inline;
+} */
+.error {
+  width: auto;
+  position: relative;
+  border-radius: 5px;
+  color: #bd3226;
+  margin-top: -15px;
+}
+.error ul{
+padding: 3px 19px;
+margin-left:-2%;
+}
+.error ul li {
+font-size: 12px;
 }
 

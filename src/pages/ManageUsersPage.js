@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Users from '../components/Users/Users';
-import Table from 'react-bootstrap/Table';
-import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
+import { Row, Container, Col, Button, Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { getUsers } from '../redux/actions';
-import Navbar from '../layouts/Navbar'
 import SendInvite from '../components/Auth/SendInvite';
+import AdminLayout from '../layouts/AdminLayout';
 
 class ManageUsersPage extends Component {
   componentDidMount() {
@@ -20,23 +19,32 @@ class ManageUsersPage extends Component {
       <p>Loading ....</p>
     );
     return (
-      <>
-      <Navbar/>
-      <div style={{width:'100%' ,padding:10,}}>
-      Users List, <SendInvite/>
-      </div>
-      <Table striped bordered hover>
+      <AdminLayout>
+       <Row>
+					<Col sm={8}>
+						<h4>Category</h4>
+					</Col>
+          <Col sm={2}>
+              <SendInvite/>
+          </Col>
+          <Col sm={2}>
+              <Button href="/dashboard" variant="secondary btn-block mb-2">Go back</Button>
+          </Col>
+				</Row>
+        <Row className="admin-box mt-4">
+        <Table responsive borderless striped hover>
         <thead>
-          <tr>
+            <tr>
             <th>Id</th>
-            <th>User</th>
-            <th>Body</th>
+            <th>username</th>
+            <th>email</th>
             <th>Actions</th>
           </tr>
         </thead>
         {recentUsers}
-      </Table>
-      </>
+        </Table>
+				</Row>
+		 </AdminLayout>
     );
   }
 }

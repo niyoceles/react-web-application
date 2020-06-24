@@ -1,30 +1,30 @@
-import React, { Component } from 'react';
-import { MDBContainer, MDBRow, MDBInput, MDBCol, MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText,
-  MDBModal, MDBModalBody, MDBModalHeader } from "mdbreact";
+import React, { Component, Fragment } from 'react';
 import Validator from '../../utils/validation';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { sendAnInvite } from '../../redux/actions';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 class SendInvite extends Component {
   state = {
-    names: '',
+    name: '',
     email: '',
     phone: '',
     confirmEmail:'',
     emailError: '',
     confirmEmailError: '',
     errors: {},
-    modal4: false,
+    open: false,
   };
 
-  toggle = nr => () => {
-    let modalNumber = 'modal' + nr
-    this.setState({
-      [modalNumber]: !this.state[modalNumber]
-    });
-  }
-
+  handleOpen = () => {
+    this.setState({ open: true });
+  };
+  handleClose = () => {
+    this.setState({ open: false });
+  };
 
   handleChange = e => {
     const { name, value } = e.target;
@@ -35,7 +35,7 @@ class SendInvite extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const {
-      email, names, phone
+      email, name, phone
     } = this.state;
 
     const emailError = Validator.validateEmail({ email });
@@ -53,9 +53,9 @@ class SendInvite extends Component {
     }
 
     const sendInviteData = {
-      email, names, phone
+      name, email, phone
     };
-    this.props.sendAnInvite(sendInviteData);
+    this.props.sendAnInvite(sendInviteData, this.props.history);
   };
 
   displayError = (error, key) => {
@@ -70,96 +70,91 @@ class SendInvite extends Component {
 
   render() {
     const {
-     phone, names, emailError, email, confirmEmailError, confirmEmail,
+     phone, name, open, emailError, email, confirmEmailError, confirmEmail,
     } = this.state;
 
 
     return (
-      <>
-      <MDBBtn color="primary" onClick={this.toggle(4)} rounded>Send Invitation </MDBBtn>
-      <MDBModal isOpen={this.state.modal4} toggle={this.toggle(4)} size="lg">
-        <MDBModalHeader toggle={this.toggle(4)}>Send invitation account</MDBModalHeader>
-        <MDBModalBody>
-         <MDBRow>
-         <MDBCol md='12' className="pull-right">
-         <form onSubmit={this.handleSubmit}>
-           <p className='h4 text-center mb-8'>Fill the form below to send an invitation account</p>
-           <div className='grey-text'>
-             <MDBInput 
-             id='names'
-             name='names'
-             label="Type names" 
-             icon="user" 
-             group 
-             type="text" 
-             validate error="wrong"
-             success="right"
-             value={names}
-             onChange={this.handleChange}
-             required
-             />
-             <MDBInput 
-             id='phone'
-             name='phone'
-             label="Phone number" 
-             icon="phone" 
-             group 
-             type="text" 
-             validate error="wrong"
-             success="right"
-             value={phone}
-             onChange={this.handleChange}
-             required
-             />
-             <MDBInput
-               id='email'
-               name='email'
-               label='Type an email'
-               icon='envelope'
-               group
-               type='text'
-               validate
-               error='wrong'
-               success='right'
-               value={email}
-               onChange={this.handleChange}
-               required
-             />
-             <MDBInput 
-             id="confirmEmail"
-             name="confirmEmail"
-             label="Confirm your email" 
-             icon="exclamation-triangle" 
-             group  
-             validate
-             type='text'
-             error="wrong" 
-             success="right"
-             value={confirmEmail}
-             onChange={this.handleChange}
-             required 
-             />
-           </div>
-           <div className='text-center'>
-             <div>
-             {confirmEmailError ? (
-               <div className="error">
-                Email Not match!
-               </div>
-             ) : false}
-             {emailError && <div className="error">{emailError}</div>}
-           </div>
-             <MDBBtn color='primary' type='submit'>
-               Send&nbsp;Invitation
-             </MDBBtn>
-             <br />
-           </div>
-         </form>
-       </MDBCol>
-        </MDBRow>
-        </MDBModalBody>
-      </MDBModal>
-      </>    
+      <Fragment>
+        <Button variant="primary btn-block mb-2" className="mr-2" onClick={this.handleOpen}>
+         Add new user
+      </Button>
+        <Modal show={open} onHide={this.handleClose} size="lg">
+          <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+          Create new user
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body> 
+        <Form className='p-3 box'>
+					<p className='text-center small mb-4'>
+						Fill the form to add new user 
+          </p>
+          <Form.Group>
+						<Form.Label>Full names</Form.Label>
+						<Form.Control
+							type='text'
+							name="name"
+							placeholder='Enter full names'
+							value={name}
+              onChange={this.handleChange}
+              required
+						/>
+          </Form.Group>
+          <Form.Group>
+						<Form.Label>Phone Number</Form.Label>
+						<Form.Control
+							type='text'
+							name="phone"
+							placeholder='Enter phone number'
+							value={phone}
+              onChange={this.handleChange}
+              required
+						/>
+					</Form.Group>
+					<Form.Group>
+						<Form.Label>Email address</Form.Label>
+            <Form.Control
+              id="email"
+							type='email'
+							name="email"
+							placeholder='Enter email'
+							value={email}
+              onChange={this.handleChange}
+              required
+						/>
+          </Form.Group>
+          <Form.Group>
+          <Form.Label>Confirm Email</Form.Label>
+          <Form.Control
+            type='email'
+            id="confirmEmail"
+            name="confirmEmail"
+            placeholder='Enter email'
+            value={confirmEmail}
+            onChange={this.handleChange}
+            required
+          />
+        </Form.Group>
+        </Form>
+        <div>
+        {confirmEmailError ? (
+          <div className="error">
+           Email Not match!
+          </div>
+        ) : false}
+      </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button color="secondary" onClick={this.handleClose}>Close</Button>
+          <Button 	
+          variant='primary'
+          type='submit'
+          className='col-sm-4 btn-block float-right'
+          onClick={this.handleSubmit}>Send invitation</Button>
+        </Modal.Footer>
+        </Modal>
+     </Fragment>   
     );
   }
 }

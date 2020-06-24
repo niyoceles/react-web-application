@@ -169,6 +169,10 @@ class Upload extends Component {
             })}
           </div>
         </div>
+            {this.props.uploadedFile?(
+              <div className="Upload">
+              <img src={this.props.uploadedFile} style={{width:'80%'}}/></div>
+              ):null}
         <div className="Actions">{this.renderActions()}</div>
       </div>
     );

@@ -50,12 +50,13 @@ class UpdateArticle extends Component {
     const { title, category, text, selectedFile } = this.state;
 
     const articleData = {
+      id:this.props.articleId,
       title,
       category,
       file: selectedFile,
       text,
     };
-    this.props.addArticle(articleData);
+    this.props.addArticle(articleData, this.props.history);
   };
 
   render() {
@@ -79,7 +80,7 @@ class UpdateArticle extends Component {
       <Modal.Body>    
         <form onSubmit={this.handleSubmit}>
         <div className='container'>
-        <Upload />
+        <Upload uploadedFile={this.props.contentFile} />
       </div>
       <div style={{ paddingBottom: 15 }}>
         <h5>Choose category of content</h5>

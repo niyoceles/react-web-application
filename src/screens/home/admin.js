@@ -14,7 +14,7 @@ export class DashboardScreen extends React.Component
 					</Col>
 				</Row>
 				<Row className="mt-4">
-					<a href="/commisioner" className="card mb-3 col-sm-3 col-md-3 col-xs-12 text-center">
+					<a href="/users" className="card mb-3 col-sm-3 col-md-3 col-xs-12 text-center">
 		  				<div className="card-body text-white bg-success rounded">
 		  					<i className="fa fa-users" style={{ fontSize: "42px" }}></i>
 		    				<h5 className="card-title mt-3">Comissioners</h5>
