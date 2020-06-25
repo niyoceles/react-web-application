@@ -5,7 +5,7 @@ import { AuthLayout } from '../../layouts';
 import { connect } from 'react-redux';
 import { loginUser } from '../../redux/actions';
 
- class LoginScreen  extends Component {
+class LoginScreen  extends Component {
 	state = {
 		email: '',
 		password: '',
@@ -76,18 +76,18 @@ import { loginUser } from '../../redux/actions';
 }
 
 LoginScreen.propTypes = {
-  loginUser: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired,
-  UI: PropTypes.object.isRequired,
+  	loginUser: PropTypes.func.isRequired,
+  	user: PropTypes.object.isRequired,
+  	UI: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
-  user: state.user,
-  UI: state.UI,
+  	user: state.user,
+  	UI: state.UI,
 });
 
 const mapActionToProps = {
-  loginUser,
+  	loginUser,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(LoginScreen);

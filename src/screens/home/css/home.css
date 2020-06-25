@@ -1,0 +1,42 @@
+.section-1 {
+	background: url('https://media.architecturaldigest.com/photos/5cf0355bfd278a33d596e23b/master/w_1600%2Cc_limit/illume_orig.jpg');
+	min-height: 80vh;
+	background-size: cover;
+	background-attachment: fixed;
+	margin-top: 65px;
+}
+
+.section-1 .row {
+	margin-left: 10%;
+}
+
+.section-1 .text {
+	margin-top: 80px !important;
+	color: #ffffff;
+}
+
+.section-1 .text h4 {
+	font-size: 22px;
+	font-weight: 300;
+	letter-spacing: 0;
+	margin-bottom: 0px;
+}
+
+.section-1 .text h2 {
+	font-size: 52px;
+	font-weight: bold;
+	letter-spacing: 0.5px;
+	letter-spacing: 2;
+	margin-bottom: 20px;
+}
+
+.section-1 .btn {
+	font-size: 12px !important;
+}
+
+.section-1 .form-control,
+.section-1 .form-control:hover,
+.section-1 .form-control:active,
+.section-1 .form-control:focus {
+	height: 50px !important;
+}

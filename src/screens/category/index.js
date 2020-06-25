@@ -1,10 +1,24 @@
 import React from 'react';
 import { Row, Container, Col, Button, Table } from 'react-bootstrap';
-
+import axios from 'axios';
 import AdminLayout from '../../layouts/AdminLayout';
 
 export class CategoryScreen extends React.Component
 {
+    constructor(props) {
+        super(props);
+
+        this.state = { categories: [] }
+    }
+
+    componentDidMount() {
+        axios.defaults.headers.common['Authorization'] ='Token e81989f716e5d3068c90e98cf5af38851867b75f';
+        axios.get('http://api.nurc.bict.rw/category/')
+             .then(result => {
+                this.setState({ categories: result.data })
+             });
+    }
+
 	render() {
 		return (
 			<AdminLayout>
@@ -29,16 +43,18 @@ export class CategoryScreen extends React.Component
                             </tr>
                         </thead>
                         <tbody>
-                            {Array(20).fill(1).map((el, i) =>
-                                <tr>
-                                    <td className="text-center">{ i + 1 }</td>
-                                    <td>Article</td>
-                                    <td>
-                                        <a href="" className="btn btn-primary btn-sm mr-2 small"><i className="fa fa-edit"></i></a>
-                                        <a href="" className="btn btn-danger btn-sm small"><i className="fa fa-trash"></i></a>
-                                    </td>
-                                </tr>
-                            )}
+                            {
+                                this.state.categories.map((category, i) => (
+                                    <tr>
+                                        <td className="text-center">{ i + 1 }</td>
+                                        <td>{ category.name }</td>
+                                        <td>
+                                            <a href="" className="btn btn-primary btn-sm mr-2 small"><i className="fa fa-edit"></i></a>
+                                            <a href="" className="btn btn-danger btn-sm small"><i className="fa fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                ))
+                            }
                         </tbody>
                     </Table>
 				</Row>
