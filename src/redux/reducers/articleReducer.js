@@ -30,7 +30,7 @@ export default function(state = initialState, action) {
       };
     case DELETE_ARTICLE:
       let index = state.articles.findIndex(
-        article => article.articleId === action.payload.articleId
+        article => article.articleId === action.payload
       );
       index = state.articles.findIndex(article => article.articleId === action.payload);
       state.articles.splice(index, 1);

@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import { Row, Container, Col, Button, ButtonGroup, Table, Dropdown } from 'react-bootstrap';
 
 import DeleteArticle from './DeleteArticle';
 import UpdateArticle from './UpdateArticle';
 import { connect } from 'react-redux';
+import ChangeArticleStatus from './ChangeArticleStatus';
 
 class ManageArticles extends Component {
   render() {
@@ -14,18 +16,19 @@ class ManageArticles extends Component {
     const {
       classes,
       article: {
-        body,
-        createAt,
-        userImage,
-        userName,
-        postId,
-        likeCount,
-        commentCount,
+        id,
+        title,
+        text,
+        status,
+        file,
+        category,
+        user,
+        created_at,
       },
-      user: {
-        authenticated,
-        credentials: { username },
-      },
+      // user: {
+      //   authenticated,
+      //   credentials: { username },
+      // },
     } = this.props;
 
     // const deleteButton =
@@ -36,20 +39,50 @@ class ManageArticles extends Component {
     return (
       <tbody>
         <tr>
-          <td>{postId}</td>
-          <td>{userName}</td>
-          <td>{dayjs(createAt).fromNow()}</td>
+          <td>{title}</td>
+          <td>{category}</td>
+          <td>{user}</td>
+          <td style={{display:'block', width:'190px'}}>
+          <ChangeArticleStatus
+          articleId={id}
+          userNames={user}
+          articleStatus={status}
+          articleName={title}
+          contentText={text}
+        />
+        {status?('Active') : ('Deactive')}
+        </td>
+          <td>{dayjs(created_at).fromNow()}</td>
           <td>
-            <DeleteArticle
-              starId={postId}
-              starName={userName}
-              starCoordinates={dayjs(createAt).fromNow()}
+            <Dropdown>
+                <Dropdown.Toggle variant="success" className="btn-sm" id="dropdown-basic">
+                    Action
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                    <Dropdown.Item href="#">View</Dropdown.Item>
+                    <Dropdown.Item href="#">Enable / Disale</Dropdown.Item>
+                </Dropdown.Menu>
+            </Dropdown>
+        </td>
+          <td>
+          <UpdateArticle
+              articleId={id}
+              articleName={title}
+              userNames={user}
+              category={category}
+              contentText={text}
+              contentFile={file}
             />
-            <UpdateArticle
-              starId={postId}
-              starName={userName}
-              starCoordinates={dayjs(createAt).fromNow()}
-            />
+          </td>
+          <td>
+          <DeleteArticle
+            articleId={id}
+            userNames={user}
+            articleName={title}
+            contentText={text}
+          />
+          
           </td>
         </tr>
       </tbody>

@@ -18,7 +18,7 @@ export default class Validator {
     return emailError;
   }
 
-  static validatePassoword(info) {
+  static validatePassword(info) {
     const fields = Object.keys(info);
     let passwordError;
     const pwdRegex = /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/;
