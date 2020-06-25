@@ -21,3 +21,5 @@ export class AuthLayout extends React.Component
 		);
 	}
 }
+
+export default AuthLayout

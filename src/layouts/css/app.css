@@ -1,0 +1,9 @@
+.app-body {
+	background: #fafafa;
+	min-height: 80vh !important;
+}
+
+.navbar {
+	position: fixed;
+	min-width: 100%;
+}

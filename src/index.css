@@ -48,8 +48,7 @@ td {
 	outline: 0 !important;
 	box-shadow: none !important;
 	border-radius: 0px !important;
-	font-size: 12px;
-	height: 42px;
+	font-size: 12px !important;
 }
 
 .btn,
