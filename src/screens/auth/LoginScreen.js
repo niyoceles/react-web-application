@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Row, Container, Col, Form, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { AuthLayout } from '../../layouts';
 import { connect } from 'react-redux';
 import { loginUser } from '../../redux/actions';
 
-class LoginScreen  extends Component {
+class LoginScreen extends Component {
 	state = {
 		email: '',
 		password: '',
@@ -46,7 +46,7 @@ class LoginScreen  extends Component {
 						<Form.Label>Email address</Form.Label>
 						<Form.Control
 							type='email'
-							name="email"
+							name='email'
 							placeholder='Enter email'
 							value={this.state.email}
 							onChange={this.handleChange}
@@ -56,7 +56,7 @@ class LoginScreen  extends Component {
 						<Form.Label>Password</Form.Label>
 						<Form.Control
 							type='password'
-							name="password"
+							name='password'
 							placeholder='********'
 							value={this.state.password}
 							onChange={this.handleChange}
@@ -76,18 +76,18 @@ class LoginScreen  extends Component {
 }
 
 LoginScreen.propTypes = {
-  	loginUser: PropTypes.func.isRequired,
-  	user: PropTypes.object.isRequired,
-  	UI: PropTypes.object.isRequired,
+	loginUser: PropTypes.func.isRequired,
+	user: PropTypes.object.isRequired,
+	UI: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
-  	user: state.user,
-  	UI: state.UI,
+	user: state.user,
+	UI: state.UI,
 });
 
 const mapActionToProps = {
-  	loginUser,
+	loginUser,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(LoginScreen);

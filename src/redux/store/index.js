@@ -10,16 +10,16 @@ const initialState = {};
 const middleware = [thunk];
 
 const reducers = combineReducers({
-  //the state with their valuees
-  user: userReducer,
-  article: articleReducer,
-  UI: uiReducer
+	//the state with their valuees
+	user: userReducer,
+	article: articleReducer,
+	UI: uiReducer,
 });
 
 const composeEnhancers =
-  typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
-    : compose;
+	typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+		? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+		: compose;
 
 const enhancer = composeEnhancers(applyMiddleware(...middleware));
 const store = createStore(reducers, initialState, enhancer);

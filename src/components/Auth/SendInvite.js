@@ -70,7 +70,7 @@ class SendInvite extends Component {
 
   render() {
     const {
-     phone, name, open, emailError, email, confirmEmailError, confirmEmail,
+     phone, name, open, email, confirmEmailError, confirmEmail,
     } = this.state;
 
 

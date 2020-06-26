@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Users from '../components/Users/Users';
-import { Row, Container, Col, Button, Table } from 'react-bootstrap';
+import { Row, Col, Button, Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { getUsers } from '../redux/actions';
 import SendInvite from '../components/Auth/SendInvite';

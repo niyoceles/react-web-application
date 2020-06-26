@@ -2,6 +2,7 @@ import 'dotenv/config';
 import React, { Component, Fragment } from 'react';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-inline';
+import editorConfigs from '../../helpers/ckEditorConfig';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addArticle } from '../../redux/actions';
@@ -25,7 +26,14 @@ class CreateArticle extends Component {
 
 	handleSubmit = e => {
 		e.preventDefault();
+		
 		const { title, category, text, selectedFile } = this.state;
+		// if(!selectedFile){
+		// 	console.log('image is null');
+		// 	return <div className="error">Image is null </div>
+		// }
+
+		
 		const articleData = {
 			title,
 			file: selectedFile,
@@ -38,12 +46,14 @@ class CreateArticle extends Component {
 
 	render() {
 		const { category, title, text, selectedFile } = this.state;
+		let validateFile = !selectedFile ?(<div>file image is required</div>): null;
 		return (
 			<AdminLayout>
 				<form onSubmit={this.handleSubmit} style={{border: '20px solid #fff'}}>
 					<p className='h2 text-center mb-8'>Create an article</p>
 					<div className='container'>
 						<Upload />
+						{/*validateFile*/}
 					</div>
 					<div style={{ paddingBottom: 15 }}>
 						<h5>Choose category of content</h5>
