@@ -1,10 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import Modal from 'react-bootstrap/Modal';
-import ModalDialog from 'react-bootstrap/ModalDialog';
-import ModalHeader from 'react-bootstrap/ModalHeader';
-import ModalTitle from 'react-bootstrap/ModalTitle';
-import ModalBody from 'react-bootstrap/ModalBody';
-import ModalFooter from 'react-bootstrap/ModalFooter';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import Upload from '../../helpers/upload/Upload';
@@ -60,16 +55,11 @@ class UpdateArticle extends Component {
   };
 
   render() {
-    const { file, category, title, text, selectedFile } = this.state;
-    // if (selectedFile) {
-    //   if (selectedFile.type.startsWith('image')) {
-    //     console.log('Image file');
-    //   }
-    // }
+    const { open, category, title, text } = this.state;
     return (
       <Fragment>
       <a href="#" onClick={this.handleOpen} className="btn btn-primary btn-sm mr-2 small"><i className="fa fa-edit"></i></a>
-       <Modal show={this.state.open} onHide={this.handleClose} size="lg">
+       <Modal show={open} onHide={this.handleClose} size="lg">
         <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
         Update an article
