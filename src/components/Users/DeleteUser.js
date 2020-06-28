@@ -1,8 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
 import {
-	MDBContainer,
 	MDBRow,
 	MDBBtn,
 	MDBModal,
@@ -32,7 +30,6 @@ class DeleteUser extends Component {
 		this.setState({ open: false });
 	};
 	render() {
-		const { classes } = this.props;
 
 		return (
 			<Fragment>

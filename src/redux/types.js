@@ -23,6 +23,10 @@ export const SET_ARTICLES = 'SET_ARTICLES';
 export const DELETE_ARTICLE = 'DELETE_ARTICLE';
 export const POST_ARTICLE = 'POST_ARTICLE';
 export const CHANGE_ARTICLE_STATUS = 'CHANGE_ARTICLE_STATUS';
+export const ADD_COMMENT = 'ADD_COMMENT';
+export const GET_COMMENTS = 'GET_COMMENTS';
+export const ADD_VIEW = 'ADD_VIEW';
+export const GET_VIEWS = 'GET_VIEWS';
 // CLIENT SIDE
 export const VIEW_ARTICLES = 'VIEW_ARTICLES';
 export const VIEW_ARTICLE = 'VIEW_ARTICLE';

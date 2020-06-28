@@ -1,14 +1,13 @@
 import 'dotenv/config';
-import React, { Component, Fragment } from 'react';
+import React, { Component} from 'react';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-inline';
-import editorConfigs from '../../helpers/ckEditorConfig';
+// import editorConfigs from '../../helpers/ckEditorConfig';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addArticle } from '../../redux/actions';
 import Upload from '../../helpers/upload/Upload';
 import AdminLayout from '../../layouts/AdminLayout';
-import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
@@ -36,12 +35,12 @@ class CreateArticle extends Component {
 		
 		const articleData = {
 			title,
-			file: selectedFile,
+			file: localStorage.getItem('fileUrl'),
 			text,
 			category,
 		};
 		this.props.addArticle(articleData, this.props.history);
-		localStorage.removeItem('fileUrl');
+		// localStorage.removeItem('fileUrl');
 	};
 
 	render() {
@@ -67,7 +66,7 @@ class CreateArticle extends Component {
 							<option value='1adee4dc94b447a5949feaa6cc7d277e'>
 								Written article
 							</option>
-							<option value='2'>Video</option>
+							<option value='f6b0f561-759b-4b5d-85a3-32b61aa8cde5'>Video</option>
 							<option value='3'>Audio</option>
 						</select>
 					</div>

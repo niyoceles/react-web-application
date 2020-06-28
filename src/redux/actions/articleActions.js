@@ -9,7 +9,11 @@ import {
 	SET_ARTICLES,
 	CHANGE_ARTICLE_STATUS,
 	VIEW_ARTICLES,
-	VIEW_ARTICLE
+	VIEW_ARTICLE,
+	ADD_COMMENT,
+	GET_COMMENTS,
+	ADD_VIEW,
+	GET_VIEWS,
 } from '../types';
 import axios from 'axios';
 import { setAuthorization } from './userActions';
@@ -102,14 +106,12 @@ export const getArticles = () => dispatch => {
 	axios
 		.get('http://api.nurc.bict.rw/article/all/')
 		.then(res => {
-			console.log('dddddddd', res.data);
 			dispatch({
 				type: SET_ARTICLES,
 				payload: res.data,
 			});
 		})
 		.catch(err => {
-			console.log('eerrrrr', err.response);
 			dispatch({
 				type: SET_ERRORS,
 				payload: [],
@@ -122,15 +124,15 @@ export const viewArticles = () => dispatch => {
 	axios
 		.get('http://api.nurc.bict.rw/article/')
 		.then(res => {
-		const arr =	res.data.map(i=>i.articles);
-			// console.log('articles:', arr[0].map(i=>i.id));
+			const categories = res.data.map(i => i.category);
+			const articles = res.data.map(i => i.articles);
+			const all = { articles, categories };
 			dispatch({
 				type: VIEW_ARTICLES,
-				payload: res.data.map(i=>i.articles),
+				payload: all,
 			});
 		})
 		.catch(err => {
-			console.log('eerrrrr', err.response);
 			dispatch({
 				type: SET_ERRORS,
 				payload: [],
@@ -138,19 +140,17 @@ export const viewArticles = () => dispatch => {
 		});
 };
 
-export const viewArticle = (articleId) => dispatch => {
+export const viewArticle = articleId => dispatch => {
 	dispatch({ type: LOADING_DATA });
 	axios
 		.get(`http://api.nurc.bict.rw/article/view/${articleId}`)
 		.then(res => {
-			// console.log('article:', res.data);
 			dispatch({
 				type: VIEW_ARTICLE,
 				payload: res.data,
 			});
 		})
 		.catch(err => {
-			console.log('eerrrrr', err.response);
 			dispatch({
 				type: SET_ERRORS,
 				payload: [],
@@ -158,4 +158,43 @@ export const viewArticle = (articleId) => dispatch => {
 		});
 };
 
+// ADD COMMENTS
+export const addComment = commentData => dispatch => {
+	axios
+		.post('http://api.nurc.bict.rw/article/comment/store/', commentData)
+		.then(res => {
+			dispatch({ type: ADD_COMMENT, payload: res.data });
+		})
+		.catch(err => console.log(err));
+};
 
+// VIEW COMMENTS
+export const viewComments = articleId => dispatch => {
+	axios
+		.post('http://api.nurc.bict.rw/article/comment/', articleId)
+		.then(res => {
+			dispatch({ type: GET_COMMENTS, payload: res.data });
+		})
+		.catch(err => console.log(err.response));
+};
+
+
+// COUNT VIEW ARTICLE
+export const countViewArticle = articleId => dispatch => {
+	axios
+		.post('http://api.nurc.bict.rw/article/seen/store/', articleId)
+		.then(res => {
+			dispatch({ type: ADD_VIEW, payload: res.data });
+		})
+		.catch(err => console.log(err));
+};
+
+// ARTICLE VIEWS
+export const getArticleViews = articleId => dispatch => {
+	axios
+		.post('http://api.nurc.bict.rw/article/seen/', articleId)
+		.then(res => {
+			dispatch({ type: GET_VIEWS, payload: res.data });
+		})
+		.catch(err => console.log(err.response));
+};

@@ -1,0 +1,33 @@
+.view {
+	color: #444444;
+}
+
+.view span {
+	color: #aaaaaa;
+}
+.comments{
+	margin-top: 50px;
+}
+
+.view .title {
+	font-size: 24px;
+	letter-spacing: 0;
+	display: inline-block;
+}
+
+.comments img {
+	width: 50px;
+	border-radius: 50%;
+}
+
+.comments h5 {
+	margin-top: 5px;
+	font-size: 14px;
+	color: #444444;
+	font-weight: 500;
+}
+
+.comments h5 span {
+	font-size: 12px;
+	color: #aaaaaa;
+}
