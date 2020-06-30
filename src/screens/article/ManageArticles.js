@@ -30,9 +30,7 @@ class ManageArticlesScreen extends Component {
 		);
 		return (
 			<AdminLayout>
-				<br />
-				<br />
-				<Row>
+				<Row className="mt-5">
 					<Col sm={8}>
 						<h4>Article</h4>
 					</Col>
@@ -62,7 +60,7 @@ class ManageArticlesScreen extends Component {
 								<th>Actions</th>
 							</tr>
 						</thead>
-						{allArticles}
+						{ allArticles }
 					</Table>
 				</Row>
 			</AdminLayout>
