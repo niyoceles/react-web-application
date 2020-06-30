@@ -1,9 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
-import ReactHtmlParser from 'react-html-parser';
-import { Modal, Button, Image } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeArticleStatus } from '../../redux/actions';
 
@@ -26,14 +23,8 @@ class ChangeArticleStatus extends Component {
 		this.setState({ open: false });
 	};
 	render() {
-		dayjs.extend(relativeTime);
 		const {
-			articleFile,
-			articleName,
-			articleId,
 			articleStatus,
-			contentText,
-			createAt,
 		} = this.props;
 		return (
 			<Fragment>
@@ -56,25 +47,13 @@ class ChangeArticleStatus extends Component {
 							Change article status
 						</Modal.Title>
 					</Modal.Header>
-					<Modal.Body
-						style={{
-							'max-height': 'calc(100vh - 210px)',
-							'overflow-y': 'auto',
-						}}>
-						<Image
-							src={`${articleFile}?auto=compress&cs=tinysrgb&dpr=1&w=500`}
-							className='img-fluid img-responsive'
-							style={{ width: '100%', height: '100%' }}
-						/>
-						<h2>{articleName}</h2>
-						<small className='mt-2'>{dayjs(createAt).fromNow()}</small>
-						<p className='mt-2'>{ReactHtmlParser(contentText)}</p>
-					</Modal.Body>
-					<Modal.Footer>
+					<Modal.Body>
 						<h5>
 							This is article is {articleStatus ? ' Active' : ' Deactive'}; Are
 							you sure to change it?
 						</h5>
+					</Modal.Body>
+					<Modal.Footer>
 						<Button variant='secondary' onClick={this.handleClose}>
 							No, Close
 						</Button>

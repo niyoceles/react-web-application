@@ -5,10 +5,18 @@ import {
 	SET_ARTICLES,
 	VIEW_ARTICLES,
 	VIEW_ARTICLE,
+	ADD_COMMENT,
+	GET_COMMENTS,
+	ADD_VIEW,
+	GET_VIEWS,
 } from '../types';
 
 const initialState = {
 	articles: [],
+	comments: [],
+	comment: [],
+	view: {},
+	views: [],
 	article: {},
 	readArticle: {},
 	readArticles: [],
@@ -52,6 +60,26 @@ export default function (state = initialState, action) {
 			return {
 				...state,
 				readArticle: action.payload,
+			};
+		case ADD_COMMENT:
+			return {
+				...state,
+				comments: [action.payload, ...state.comment],
+			};
+		case GET_COMMENTS:
+			return {
+				...state,
+				comments: action.payload,
+			};
+		case ADD_VIEW:
+			return {
+				...state,
+				views: [action.payload, ...state.views],
+			};
+		case GET_VIEWS:
+			return {
+				...state,
+				views: action.payload,
 			};
 		default:
 			return state;

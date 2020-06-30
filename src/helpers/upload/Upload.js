@@ -51,7 +51,7 @@ class Upload extends Component {
   sendRequest(file) {
     return new Promise((resolve, reject) => {
       const req = new XMLHttpRequest();
-
+      console.log('fileType:', file.type);
       req.upload.addEventListener("progress", event => {
         if (event.lengthComputable) {
           const copy = { ...this.state.uploadProgress };
@@ -83,13 +83,20 @@ class Upload extends Component {
       formData.append('upload_preset', REACT_APP_CLOUDINARY_UPLOAD_PRESET); // Replace the preset name with your own
       formData.append('api_key', REACT_APP_CLOUDINARY_API_KEY); // Replace API key with your own Cloudinary key
       formData.append('timestamp', (Date.now() / 1000) | 0);
+      let fileType;
+      if(file.type.starWith('video')){
+       return fileType = 'video'
+      }
 
-      req.open("POST", `https://api.cloudinary.com/v1_1/${REACT_APP_CLOUDINARY_NAME}/image/upload`);
-      req.send(formData);
-      
+      if(file.type.starWith('image')){
+       return fileType = 'image'
+      }
+
+      req.open("POST", `https://api.cloudinary.com/v1_1/${REACT_APP_CLOUDINARY_NAME}/${fileType}/upload`);
+      req.send(formData);   
       return axios
         .post(
-          `https://api.cloudinary.com/v1_1/${REACT_APP_CLOUDINARY_NAME}/image/upload`,
+          `https://api.cloudinary.com/v1_1/${REACT_APP_CLOUDINARY_NAME}/${fileType}/upload`,
           formData
         )
         .then(response => {

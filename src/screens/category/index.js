@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Container, Col, Button, Table } from 'react-bootstrap';
+import { Row, Col, Button, Table } from 'react-bootstrap';
 import axios from 'axios';
 import AdminLayout from '../../layouts/AdminLayout';
 

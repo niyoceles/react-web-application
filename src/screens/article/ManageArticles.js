@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
 	Row,
-	Container,
 	Col,
 	Button,
-	ButtonGroup,
 	Table,
-	Dropdown,
 } from 'react-bootstrap';
 import Skeleton from 'react-loading-skeleton';
 import ManageArticles from '../../components/Articles/ManageArticles';

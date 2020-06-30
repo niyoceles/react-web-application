@@ -5,18 +5,17 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import {
 	Col,
-	Image,
 } from 'react-bootstrap';
 
 import ReadArticle from './UpdateArticle';
 import { connect } from 'react-redux';
 // import ChangeArticleStatus from './ChangeArticleStatus';
 
-class ReadArticles extends Component {
+class ReadVideos extends Component {
 	render() {
 		dayjs.extend(relativeTime);
 		const {
-			articleItem: {
+			videoItem: {
 				id,
 				title,
 				text,
@@ -25,25 +24,16 @@ class ReadArticles extends Component {
 				category,
 				created_at,
 			},
-			// user: {
-			//   authenticated,
-			//   credentials: { username },
-			// },
 		} = this.props;
-
-		// const deleteButton =
-		//   authenticated && userName === username ? (
-		//     <DeleteArticle postId={postId} />
-		//   ) : null;
-
 		return (
 			<Col sm={4}>
 			<Link to={`/article/${id}`}>
-      <Image
+			<video class='video-fluid' controls style={{ width: '100%' }}>
+			<source
 				src={`${file}?auto=compress&cs=tinysrgb&dpr=1&w=500`}
-        className='img-fluid img-responsive'
-        style={{ width: '100%', height:'200px' }}
-      />
+				type='video/mp4'
+			/>
+			</video>
       <p className='mt-2'>
         <a href={`/article/${id}`}>
          {title}
@@ -56,7 +46,7 @@ class ReadArticles extends Component {
 	}
 }
 
-ReadArticles.propTypes = {
+ReadVideos.propTypes = {
 	user: PropTypes.object.isRequired,
 };
 
@@ -64,4 +54,4 @@ const mapStateToProps = state => ({
 	user: state.user,
 });
 
-export default connect(mapStateToProps)(ReadArticles);
+export default connect(mapStateToProps)(ReadVideos);

@@ -12,6 +12,7 @@ import {
 import Skeleton from 'react-loading-skeleton';
 import AppLayout from '../../layouts/AppLayout';
 import ReadArticles from '../../components/Articles/ReadArticles';
+import ReadVideos from '../../components/Articles/ReadVideos';
 import './css/home.css';
 import { connect } from 'react-redux';
 import { viewArticles } from '../../redux/actions';
@@ -19,26 +20,38 @@ import { viewArticles } from '../../redux/actions';
 export class LandingPageScreen extends Component {
 	state = {
 		allArticles: null,
+		videos: null,
+		firstCategory: null,
 	};
 	componentDidMount() {
 		this.props.viewArticles();
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.readArticles !== null) {
-			console.log(nextProps.article.readArticles[0]);
+		if (nextProps.article.readArticles !== null) {
+			console.log('vvvvv', nextProps.article.readArticles.articles[1]);
 			this.setState({
-				allArticles: nextProps.article.readArticles[0],
+				allArticles: nextProps.article.readArticles.articles[0],
+				videos: nextProps.article.readArticles.articles[1],
+				firstCategory: nextProps.article.readArticles.categories[0],
+				secondCategory: nextProps.article.readArticles.categories[1],
 			});
 		}
 	}
 
 	render() {
-		const { readArticles, loading } = this.props.article;
-		const { allArticles } = this.state;
+		const { allArticles, videos, firstCategory, secondCategory } = this.state;
 		let landingArticles = allArticles ? (
 			allArticles.map(articleItem => (
 				<ReadArticles key={articleItem.id} articleItem={articleItem} />
+			))
+		) : (
+			<Skeleton count={15} duration={2} />
+		);
+
+		let landingVideos = videos ? (
+			videos.map(videoItem => (
+				<ReadVideos key={videoItem.id} videoItem={videoItem} />
 			))
 		) : (
 			<Skeleton count={15} duration={2} />
@@ -73,62 +86,14 @@ export class LandingPageScreen extends Component {
 				</div>
 				<Container className='py-5'>
 					<Row>
-						<h4 className='mb-3'>Article</h4>
+						<h4 className='mb-3'>{firstCategory}</h4>
+						<br/>
 						<Row>{landingArticles}</Row>
 					</Row>
 					<hr />
 					<Row>
-						<h4 className='mb-3'>Video</h4>
-						<Row>
-							<Col sm={4}>
-								<video class='video-fluid' controls style={{ width: '100%' }}>
-									<source
-										src='https://mdbootstrap.com/img/video/Sail-Away.mp4'
-										type='video/mp4'
-									/>
-								</video>
-								<small>January, 20 2020</small>
-								<p className='mt-2'>
-									<a href='/article/title'>
-										What is Lorem Ipsum Lorem Ipsum is simply dummy text of the
-										printing and typesetting industry Lorem Ipsum has been the
-										industry's standard dummy text ever
-									</a>
-								</p>
-							</Col>
-							<Col sm={4}>
-								<video class='video-fluid' controls style={{ width: '100%' }}>
-									<source
-										src='https://mdbootstrap.com/img/video/Sail-Away.mp4'
-										type='video/mp4'
-									/>
-								</video>
-								<small>January, 20 2020</small>
-								<p className='mt-2'>
-									<a href='/article/title'>
-										What is Lorem Ipsum Lorem Ipsum is simply dummy text of the
-										printing and typesetting industry Lorem Ipsum has been the
-										industry's standard dummy text ever
-									</a>
-								</p>
-							</Col>
-							<Col sm={4}>
-								<video class='video-fluid' controls style={{ width: '100%' }}>
-									<source
-										src='https://mdbootstrap.com/img/video/Sail-Away.mp4'
-										type='video/mp4'
-									/>
-								</video>
-								<small>January, 20 2020</small>
-								<p className='mt-2'>
-									<a href='/article/title'>
-										What is Lorem Ipsum Lorem Ipsum is simply dummy text of the
-										printing and typesetting industry Lorem Ipsum has been the
-										industry's standard dummy text ever
-									</a>
-								</p>
-							</Col>
-						</Row>
+						<h4 className='mb-3'>{secondCategory}</h4>
+						<Row>{landingVideos}</Row>
 					</Row>
 					<hr />
 					<Row>

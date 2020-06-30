@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import {
-	Row,
-	Col,
-	Button,
-	ButtonGroup,
-	Dropdown,
-} from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 
 import DeleteArticle from './DeleteArticle';
 import UpdateArticle from './UpdateArticle';
