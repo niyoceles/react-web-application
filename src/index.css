@@ -7,10 +7,6 @@ body {
 	letter-spacing: 0.5px;
 }
 
-iframe {
-	overflow:hidden;
-}
-
 a.small,
 a.small:hover,
 a.small:active,
