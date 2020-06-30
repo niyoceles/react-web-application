@@ -12,7 +12,7 @@ class AppLayout extends React.Component
 					<Navbar className="sticky-top" expand="lg" variant="light" bg="light">
 		                <Container>
 		                    <Navbar.Toggle aria-controls="navBarMenu" />
-		                    <Navbar.Brand href="/dashboard">NURC</Navbar.Brand>
+		                    <Navbar.Brand href="#">NURC</Navbar.Brand>
 		                    <Navbar.Collapse id="navBarMenu">
 		                        <Nav className="ml-auto">
 		                        	<NavDropdown title={

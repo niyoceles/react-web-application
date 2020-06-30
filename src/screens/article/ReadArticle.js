@@ -33,11 +33,12 @@ class ReadArticleScreen extends Component {
 							{!file ? (
 								<Skeleton count={15} duration={2} />
 							) : (
-								<Image
-									src={`${file}?auto=compress&cs=tinysrgb&dpr=1&w=500`}
-									className='img-fluid img-responsive'
-									style={{ width: '100%', height: '100%' }}
-								/>
+								<iframe
+									src="https://mdbootstrap.com/img/video/Sail-Away.mp4"
+									frameBorder="0"
+									scrolling="no"
+									autoplay="false"
+									style={{ width: '100%', height: '500px', overflow: 'hidden' }}></iframe>
 							)}
 							<h2>{title}</h2>
 							<small className='mt-2'>{dayjs(created_at).fromNow()}</small>
