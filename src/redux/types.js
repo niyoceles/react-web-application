@@ -27,6 +27,9 @@ export const ADD_COMMENT = 'ADD_COMMENT';
 export const GET_COMMENTS = 'GET_COMMENTS';
 export const ADD_VIEW = 'ADD_VIEW';
 export const GET_VIEWS = 'GET_VIEWS';
+export const SEARCH_ARTICLES = 'SEARCH_ARTICLES';
+export const RELATED_ARTICLES = 'RELATED_ARTICLES';
+export const NO_FOUND = 'NO_FOUND';
 // CLIENT SIDE
 export const VIEW_ARTICLES = 'VIEW_ARTICLES';
 export const VIEW_ARTICLE = 'VIEW_ARTICLE';

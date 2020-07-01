@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import ReactHtmlParser from 'react-html-parser';
-import { Container, Row, Col, Media } from 'react-bootstrap';
+import { Container, Row, Col} from 'react-bootstrap';
 import Skeleton from 'react-loading-skeleton';
 import AppLayout from '../../layouts/AppLayout';
 import { connect } from 'react-redux';
@@ -11,11 +11,13 @@ import {
 	viewArticle,
 	countViewArticle,
 	getArticleViews,
+	relatedArticles
 } from '../../redux/actions';
 
 import './css/article.css';
 import AddComment from '../../components/Comments/AddComment';
 import ViewComments from '../../components/Comments/ViewComments';
+import RelatedArticles from '../../components/Articles/RelatedArticles';
 
 class ReadArticleScreen extends Component {
 	componentDidMount() {
@@ -36,6 +38,7 @@ class ReadArticleScreen extends Component {
 			title,
 			text,
 			file,
+			category,
 			created_at,
 		} = this.props.article.readArticle;
 		const articleViews = this.props.article.views.length;
@@ -70,89 +73,7 @@ class ReadArticleScreen extends Component {
 							<hr />
 							<ViewComments articleId={id} />
 						</Col>
-						<Col sm={4}>
-							Related Article
-							<Media className='mt-3'>
-								<img
-									width={150}
-									className='mr-3'
-									src='https://images.pexels.com/photos/443446/pexels-photo-443446.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-									alt='Generic placeholder'
-								/>
-								<Media.Body>
-									<a href='/article/title/'>
-										<h6>Mega Hits 2020 🌱 The Best Of Vocal...</h6>
-									</a>
-									<small className='mt-0'>Article</small>
-									<br />
-									<small className='mt-0'>11k Views - 1 day ago</small>
-								</Media.Body>
-							</Media>
-							<Media className='mt-3'>
-								<img
-									width={150}
-									className='mr-3'
-									src='https://images.pexels.com/photos/443446/pexels-photo-443446.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-									alt='Generic placeholder'
-								/>
-								<Media.Body>
-									<a href='/article/title/'>
-										<h6>Mega Hits 2020 🌱 The Best Of Vocal...</h6>
-									</a>
-									<small className='mt-0'>Article</small>
-									<br />
-									<small className='mt-0'>11k Views - 1 day ago</small>
-								</Media.Body>
-							</Media>
-							<Media className='mt-3'>
-								<img
-									width={150}
-									className='mr-3'
-									src='https://images.pexels.com/photos/443446/pexels-photo-443446.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-									alt='Generic placeholder'
-								/>
-								<Media.Body>
-									<a href='/article/title/'>
-										<h6>Mega Hits 2020 🌱 The Best Of Vocal...</h6>
-									</a>
-									<small className='mt-0'>Article</small>
-									<br />
-									<small className='mt-0'>11k Views - 1 day ago</small>
-								</Media.Body>
-							</Media>
-							<Media className='mt-3'>
-								<img
-									width={150}
-									className='mr-3'
-									src='https://images.pexels.com/photos/443446/pexels-photo-443446.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-									alt='Generic placeholder'
-								/>
-								<Media.Body>
-									<a href='/article/title/'>
-										<h6>Mega Hits 2020 🌱 The Best Of Vocal...</h6>
-									</a>
-									<small className='mt-0'>Article</small>
-									<br />
-									<small className='mt-0'>11k Views - 1 day ago</small>
-								</Media.Body>
-							</Media>
-							<Media className='mt-3'>
-								<img
-									width={150}
-									className='mr-3'
-									src='https://images.pexels.com/photos/443446/pexels-photo-443446.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-									alt='Generic placeholder'
-								/>
-								<Media.Body>
-									<a href='/article/title/'>
-										<h6>Mega Hits 2020 🌱 The Best Of Vocal...</h6>
-									</a>
-									<small className='mt-0'>Article</small>
-									<br />
-									<small className='mt-0'>11k Views - 1 day ago</small>
-								</Media.Body>
-							</Media>
-						</Col>
+						<RelatedArticles categoryId={category}/>
 					</Row>
 				</Container>
 			</AppLayout>
@@ -174,4 +95,5 @@ export default connect(mapStateToProps, {
 	viewArticle,
 	countViewArticle,
 	getArticleViews,
+	relatedArticles
 })(ReadArticleScreen);

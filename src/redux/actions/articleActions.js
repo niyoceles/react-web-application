@@ -14,6 +14,9 @@ import {
 	GET_COMMENTS,
 	ADD_VIEW,
 	GET_VIEWS,
+	SEARCH_ARTICLES,
+	RELATED_ARTICLES,
+	NO_FOUND,
 } from '../types';
 import axios from 'axios';
 import { setAuthorization } from './userActions';
@@ -178,7 +181,6 @@ export const viewComments = articleId => dispatch => {
 		.catch(err => console.log(err.response));
 };
 
-
 // COUNT VIEW ARTICLE
 export const countViewArticle = articleId => dispatch => {
 	axios
@@ -197,4 +199,38 @@ export const getArticleViews = articleId => dispatch => {
 			dispatch({ type: GET_VIEWS, payload: res.data });
 		})
 		.catch(err => console.log(err.response));
+};
+
+export const searchArticles = searchItem => dispatch => {
+	axios
+		.get(`http://api.nurc.bict.rw/article/search/${searchItem}`)
+		.then(res => {
+			dispatch({
+				type: SEARCH_ARTICLES,
+				payload: res.data,
+			});
+		})
+		.catch(err => {
+			dispatch({
+				type: NO_FOUND,
+				payload: null,
+			});
+		});
+};
+
+export const relatedArticles = categoryId => dispatch => {
+	axios
+		.get(`http://api.nurc.bict.rw/article/related/${categoryId}`)
+		.then(res => {
+			dispatch({
+				type: RELATED_ARTICLES,
+				payload: res.data,
+			});
+		})
+		.catch(err => {
+			dispatch({
+				type: SET_ERRORS,
+				payload: [],
+			});
+		});
 };

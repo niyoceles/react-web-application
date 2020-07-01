@@ -9,6 +9,9 @@ import {
 	GET_COMMENTS,
 	ADD_VIEW,
 	GET_VIEWS,
+	SEARCH_ARTICLES,
+	RELATED_ARTICLES,
+	NO_FOUND,
 } from '../types';
 
 const initialState = {
@@ -20,6 +23,8 @@ const initialState = {
 	article: {},
 	readArticle: {},
 	readArticles: [],
+	relatedArticles: [],
+	searchArticles: null,
 	loading: false,
 };
 
@@ -80,6 +85,21 @@ export default function (state = initialState, action) {
 			return {
 				...state,
 				views: action.payload,
+			};
+		case RELATED_ARTICLES:
+			return {
+				...state,
+				relatedArticles: action.payload,
+			};
+		case SEARCH_ARTICLES:
+			return {
+				...state,
+				searchArticles: action.payload,
+			};
+		case NO_FOUND:
+			return {
+				...state,
+				searchArticles: action.payload,
 			};
 		default:
 			return state;
