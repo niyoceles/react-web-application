@@ -125,7 +125,7 @@ export const viewArticles = () => dispatch => {
 		.get('http://api.nurc.bict.rw/article/')
 		.then(res => {
 			const categories = res.data.map(i => i.category);
-			const articles = res.data.map(i => i.articles);
+			const articles = res.data;
 			const all = { articles, categories };
 			dispatch({
 				type: VIEW_ARTICLES,
