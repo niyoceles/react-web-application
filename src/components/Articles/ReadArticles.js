@@ -5,53 +5,52 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import {
 	Col,
-	Image,
+	Image, Row
 } from 'react-bootstrap';
 
 import ReadArticle from './UpdateArticle';
 import { connect } from 'react-redux';
-// import ChangeArticleStatus from './ChangeArticleStatus';
 
 class ReadArticles extends Component {
 	render() {
 		dayjs.extend(relativeTime);
+		
 		const {
-			articleItem: {
-				id,
-				title,
-				text,
-				status,
-				file,
-				category,
-				created_at,
-			},
-			// user: {
-			//   authenticated,
-			//   credentials: { username },
-			// },
+			category, articles
 		} = this.props;
 
-		// const deleteButton =
-		//   authenticated && userName === username ? (
-		//     <DeleteArticle postId={postId} />
-		//   ) : null;
-
 		return (
-			<Col sm={4}>
-			<Link to={`/article/${id}`}>
-      <Image
-				src={`${file}?auto=compress&cs=tinysrgb&dpr=1&w=500`}
-        className='img-fluid img-responsive'
-        style={{ width: '100%', height:'200px' }}
-      />
-      <p className='mt-2'>
-        <a href={`/article/${id}`}>
-         {title}
-        </a>
-			</p>
-			<small>{dayjs(created_at).fromNow()}</small>
-			</Link>
-    </Col>
+			<div className="mb-5">
+				<Row>
+					<Col sm={12}><h2>{category}</h2></Col>
+				</Row>
+				<Row>
+					{
+						articles.map(article => (
+							<Col sm={4}>
+								<Link to={`/article/${article.id}`}>
+									<iframe
+										src={`${article.file}?auto=compress&cs=tinysrgb&dpr=1&w=500`}
+										frameBorder='0'
+										scrolling='no'
+										autoplay='false'
+										style={{
+											width: '100%',
+											height: '350px',
+											overflow: 'hidden',
+										}}></iframe>
+					      			<p className='mt-2'>
+					        			<a href={`/article/${article.id}`}>
+					         				{article.title}
+					        			</a>
+									</p>
+									<small>{dayjs(article.created_at).fromNow()}</small>
+								</Link>
+				    		</Col>
+						))
+					}
+	    		</Row>
+    		</div>
 		);
 	}
 }

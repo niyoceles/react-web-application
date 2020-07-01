@@ -22,8 +22,13 @@ export class Routes extends React.Component {
 				<Switch>
 					<Fragment>
 						<Route exact path='/' component={LandingPageScreen} />
+						<Route exact path='/:id' component={LandingPageScreen} />
+						<Route exact path='/article/:id' component={ReadArticleScreen} />
+
+
 						<Route exact path='/login' component={LoginScreen} />
 						<Route exact path='/users' component={ManageUsersPage} />
+						
 						<Route
 							exact
 							path='/password/forgot'
@@ -35,11 +40,13 @@ export class Routes extends React.Component {
 							component={ResetPasswordScreen}
 						/>
 						<Route exact path='/password/set/' component={SetPasswordScreen} />
+						
 						<Route exact path='/dashboard' component={DashboardScreen} />
+						
+						<Route exact path='/category' component={CategoryScreen} />
+						
 						<Route exact path='/articles' component={ManageArticlesScreen} />
 						<Route exact path='/articles/create' component={CreateArticle} />
-						<Route exact path='/article/:id' component={ReadArticleScreen} />
-						<Route exact path='/category' component={CategoryScreen} />
 					</Fragment>
 				</Switch>
 			</Router>
