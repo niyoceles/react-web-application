@@ -8,6 +8,7 @@ import {
 } from './screens';
 import LandingPageScreen from './screens/home/LandingPage';
 import ManageArticlesScreen from './screens/article/ManageArticles';
+import ManageCommentsScreen from './screens/comment/ManageComments';
 import ReadArticleScreen from './screens/article/ReadArticle';
 import SetPasswordScreen from './screens/auth/password/set';
 import LoginScreen from './screens/auth/LoginScreen';
@@ -39,6 +40,7 @@ export class Routes extends React.Component {
 						<Route exact path='/dashboard' component={DashboardScreen} />
 						<Route exact path='/category' component={CategoryScreen} />
 						<Route exact path='/articles' component={ManageArticlesScreen} />
+						<Route exact path='/comments' component={ManageCommentsScreen} />
 						<Route exact path='/articles/create' component={CreateArticle} />
 					</Fragment>
 				</Switch>

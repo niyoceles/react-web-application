@@ -234,3 +234,35 @@ export const relatedArticles = categoryId => dispatch => {
 			});
 		});
 };
+
+export const changeCommentStatus = (articleId, history) => dispatch => {
+	axios.defaults.headers.common['Authorization'] =
+		'Token e81989f716e5d3068c90e98cf5af38851867b75f';
+	axios
+		.post('http://api.nurc.bict.rw/article/status/', articleId)
+		.then(res => {
+			history.push('/articles');
+			dispatch({ type: CHANGE_ARTICLE_STATUS, payload: articleId.id });
+		})
+		.catch(err => console.log(err));
+};
+
+export const getComments = () => dispatch => {
+	dispatch({ type: LOADING_DATA });
+	axios.defaults.headers.common['Authorization'] =
+		'Token 60756d77ba57d8de4ba99f2af2d4d04bb25cbb05';
+	axios
+		.get('http://api.nurc.bict.rw/article/all/')
+		.then(res => {
+			dispatch({
+				type: SET_ARTICLES,
+				payload: res.data,
+			});
+		})
+		.catch(err => {
+			dispatch({
+				type: SET_ERRORS,
+				payload: [],
+			});
+		});
+};

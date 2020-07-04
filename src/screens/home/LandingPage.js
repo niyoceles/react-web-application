@@ -53,7 +53,7 @@ export class LandingPageScreen extends Component {
 
 	handleSearch = event => {
 		event.preventDefault();
-		const { search, loading } = this.state;
+		const { search } = this.state;
 		this.setState({
 			loading: true,
 		});
