@@ -10,28 +10,28 @@ class ManageArticles extends Component {
 	render() {
 		dayjs.extend(relativeTime);
 		const {
-			article: { id, title, text, status, file, category, user, created_at },
+			comment: { id, name, email, status, message, article, created_at },
 		} = this.props;
 
 		return (
 			<tbody>
 				<tr>
-					<td>{title}</td>
-					<td>{category}</td>
-					<td>{user}</td>
+					<td>{id}</td>
+					<td>{name}</td>
+					<td>{email}</td>
+					<td>{dayjs(created_at).fromNow()}</td>
 					<td style={{ display: 'block', width: '190px' }}>
 						<ChangeCommentStatus
-							articleId={id}
-							userNames={user}
-							articleFile={file}
-							articleStatus={status}
-							articleName={title}
-							contentText={text}
-							createAt={created_at}
+							commentId={id}
+							email={email}
+							name={name}
+							commentStatus={status}
+							commentName={article}
+							message={message}
+							createAt={dayjs(created_at).fromNow()}
 						/>
 						{status ? 'Active' : 'Deactive'}
 					</td>
-					<td>{dayjs(created_at).fromNow()}</td>
 				</tr>
 			</tbody>
 		);

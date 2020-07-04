@@ -26,7 +26,6 @@ class ReadArticleScreen extends Component {
 		const data = {
 			article: articleSlugId[2],
 		};
-		console.log('DDDD', data);
 		this.props.viewArticle(articleSlugId[2]);
 		this.props.countViewArticle(data);
 		this.props.getArticleViews(data);

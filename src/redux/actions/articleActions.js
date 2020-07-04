@@ -17,6 +17,8 @@ import {
 	SEARCH_ARTICLES,
 	RELATED_ARTICLES,
 	NO_FOUND,
+	GET_ALL_COMMENTS,
+	SET_COMMENT,
 } from '../types';
 import axios from 'axios';
 import { setAuthorization } from './userActions';
@@ -239,10 +241,10 @@ export const changeCommentStatus = (articleId, history) => dispatch => {
 	axios.defaults.headers.common['Authorization'] =
 		'Token e81989f716e5d3068c90e98cf5af38851867b75f';
 	axios
-		.post('http://api.nurc.bict.rw/article/status/', articleId)
+		.post('http://api.nurc.bict.rw/article/comment/status/', articleId)
 		.then(res => {
-			history.push('/articles');
-			dispatch({ type: CHANGE_ARTICLE_STATUS, payload: articleId.id });
+			history.push('/comments');
+			dispatch({ type: SET_COMMENT, payload: articleId.id });
 		})
 		.catch(err => console.log(err));
 };
@@ -252,10 +254,10 @@ export const getComments = () => dispatch => {
 	axios.defaults.headers.common['Authorization'] =
 		'Token 60756d77ba57d8de4ba99f2af2d4d04bb25cbb05';
 	axios
-		.get('http://api.nurc.bict.rw/article/all/')
+		.get('http://api.nurc.bict.rw/article/comment/all/')
 		.then(res => {
 			dispatch({
-				type: SET_ARTICLES,
+				type: GET_ALL_COMMENTS,
 				payload: res.data,
 			});
 		})

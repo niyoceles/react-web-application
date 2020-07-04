@@ -12,10 +12,10 @@ class ManageCommentsScreen extends Component {
 		this.props.getComments();
 	}
 	render() {
-		const { articles, loading } = this.props.article;
-		let allComments = !loading ? (
-			articles.map(article => (
-				<ManageComments key={article.id} article={article} />
+		const { allComments, loading } = this.props.article;
+		let comments = !loading ? (
+			allComments.map(comment => (
+				<ManageComments key={comment.id} comment={comment} />
 			))
 		) : (
 			<Skeleton count={15} duration={2} />
@@ -38,7 +38,7 @@ class ManageCommentsScreen extends Component {
 								<th>Actions</th>
 							</tr>
 						</thead>
-						{allComments}
+						{comments}
 					</Table>
 				</Row>
 			</AdminLayout>

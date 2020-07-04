@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, Card } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeCommentStatus } from '../../redux/actions';
 
@@ -12,29 +12,26 @@ class ChangeCommentStatus extends Component {
 
 	handleOpen = () => {
 		this.setState({ open: true });
-  };
-  
+	};
+
 	handleClose = () => {
 		this.setState({ open: false });
 	};
 
-	changeArticleStatus = () => {
-		const articleDataStatus = { id: this.props.articleId };
-		this.props.changeArticleStatus(articleDataStatus, this.props.history);
+	changeStatus = () => {
+		const articleDataStatus = { id: this.props.commentId };
+		this.props.changeCommentStatus(articleDataStatus, this.props.history);
 		this.setState({ open: false });
-  };
-  
+	};
+
 	render() {
-		const {
-			articleStatus,
-		} = this.props;
+		const { commentStatus, message, email, name, createAt } = this.props;
 		return (
 			<Fragment>
 				<a
-					href='#'
 					onClick={this.handleOpen}
 					className='btn btn-primary btn-sm mr-2 small'>
-					{this.props.articleStatus ? (
+					{this.props.commentStatus ? (
 						<i class='fa fa-check-square' aria-hidden='true'></i>
 					) : (
 						<i
@@ -50,16 +47,25 @@ class ChangeCommentStatus extends Component {
 						</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
-						<h5>
-							This is comment is {articleStatus ? ' Active' : ' Deactive'}; Are
-							you sure to change it?
-						</h5>
+						<Card>
+							<Card.Header>
+								Written by {name}, {email}
+							</Card.Header>
+							<Card.Body>{message}</Card.Body>
+							<footer className='blockquote-footer'>
+							{createAt}
+							</footer>
+							<Card.Footer className='text-muted'>
+								This is comment is {commentStatus ? ' Active' : ' Deactive'};
+								Are you sure to change it?
+							</Card.Footer>
+						</Card>
 					</Modal.Body>
 					<Modal.Footer>
 						<Button variant='secondary' onClick={this.handleClose}>
 							No, Close
 						</Button>
-						<Button color='primary' onClick={this.changeArticleStatus}>
+						<Button color='primary' onClick={this.changeStatus}>
 							Yes, changes
 						</Button>
 					</Modal.Footer>

@@ -29,7 +29,6 @@ class ChangeArticleStatus extends Component {
 		return (
 			<Fragment>
 				<a
-					href='#'
 					onClick={this.handleOpen}
 					className='btn btn-primary btn-sm mr-2 small'>
 					{this.props.articleStatus ? (

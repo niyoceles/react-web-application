@@ -12,11 +12,14 @@ import {
 	SEARCH_ARTICLES,
 	RELATED_ARTICLES,
 	NO_FOUND,
+	GET_ALL_COMMENTS,
+	SET_COMMENT
 } from '../types';
 
 const initialState = {
 	articles: [],
 	comments: [],
+	allComments: [],
 	comment: [],
 	view: {},
 	views: [],
@@ -100,6 +103,16 @@ export default function (state = initialState, action) {
 			return {
 				...state,
 				searchArticles: action.payload,
+			};
+		case GET_ALL_COMMENTS:
+			return {
+				...state,
+				allComments: action.payload,
+			};
+		case SET_COMMENT:
+			return {
+				...state,
+				comment: action.payload,
 			};
 		default:
 			return state;
