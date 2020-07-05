@@ -27,6 +27,7 @@ class DeleteArticle extends Component {
 		return (
 			<Fragment>
 				<a
+					href={() => false}
 					onClick={this.handleOpen}
 					className='btn btn-danger btn-sm small'>
 					<i className='fa fa-trash'></i>

@@ -19,16 +19,24 @@ class ChangeArticleStatus extends Component {
 
 	changeArticleStatus = () => {
 		const articleDataStatus = { id: this.props.articleId };
-		this.props.changeArticleStatus(articleDataStatus, this.props.history);
+		this.props.changeArticleStatus(articleDataStatus);
 		this.setState({ open: false });
 	};
+
+	refreshPage = () => {
+		window.location.reload(false);
+	};
+
 	render() {
-		const {
-			articleStatus,
-		} = this.props;
+		const { articleStatus } = this.props;
+		if (this.props.article.article.id === this.props.articleId) {
+			this.refreshPage();
+		}
+		
 		return (
 			<Fragment>
 				<a
+					href={() => false}
 					onClick={this.handleOpen}
 					className='btn btn-primary btn-sm mr-2 small'>
 					{this.props.articleStatus ? (
@@ -71,4 +79,10 @@ ChangeArticleStatus.propTypes = {
 	articleId: PropTypes.number.isRequired,
 };
 
-export default connect(null, { changeArticleStatus })(ChangeArticleStatus);
+const mapStateToProps = state => ({
+	article: state.article,
+});
+
+export default connect(mapStateToProps, { changeArticleStatus })(
+	ChangeArticleStatus
+);

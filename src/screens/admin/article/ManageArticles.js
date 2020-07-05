@@ -7,10 +7,10 @@ import {
 	Table,
 } from 'react-bootstrap';
 import Skeleton from 'react-loading-skeleton';
-import ManageArticles from '../../components/Articles/ManageArticles';
-import AdminLayout from '../../layouts/AdminLayout';
+import ManageArticles from '../../../components/Articles/ManageArticles';
+import AdminLayout from '../../../layouts/AdminLayout';
 import { connect } from 'react-redux';
-import { getArticles } from '../../redux/actions';
+import { getArticles } from '../../../redux/actions';
 
 class ManageArticlesScreen extends Component {
 	componentDidMount() {

@@ -5,6 +5,7 @@ import {
 	SET_ARTICLES,
 	VIEW_ARTICLES,
 	VIEW_ARTICLE,
+	CHANGE_ARTICLE_STATUS,
 	ADD_COMMENT,
 	GET_COMMENTS,
 	ADD_VIEW,
@@ -113,6 +114,11 @@ export default function (state = initialState, action) {
 			return {
 				...state,
 				comment: action.payload,
+			};
+		case CHANGE_ARTICLE_STATUS:
+			return {
+				...state,
+				article: action.payload,
 			};
 		default:
 			return state;

@@ -40,7 +40,6 @@ class ManageArticles extends Component {
 
 ManageArticles.propTypes = {
 	user: PropTypes.object.isRequired,
-	users: PropTypes.object.isRequired,
 	openDialog: PropTypes.bool,
 };
 

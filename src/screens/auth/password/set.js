@@ -23,7 +23,7 @@ class SetPasswordScreen extends Component {
 
 	handleSubmit = e => {
 		e.preventDefault();
-		const { password, names } = this.state;
+		const { password } = this.state;
 
 		const passwordError = Validator.validatePassword({ password });
 		if (passwordError) {

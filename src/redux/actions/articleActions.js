@@ -22,21 +22,19 @@ import {
 } from '../types';
 import axios from 'axios';
 import { setAuthorization } from './userActions';
-const { REACT_APP_BASE_URL } = process.env;
+// const { REACT_APP_BASE_URL } = process.env;
 
 // Post a article
 export const addArticle = (newArticle, history) => dispatch => {
 	const token = localStorage.getItem('nurcToken');
 	// const role = localStorage.getItem('nurcRole');
 	// setAuthorization(token, role);
-	console.log('Resultzzzz:', newArticle);
 	axios.defaults.headers.common['Authorization'] =
 		'Token 60756d77ba57d8de4ba99f2af2d4d04bb25cbb05';
 	dispatch({ type: LOADING_UI });
 	axios
 		.post('http://api.nurc.bict.rw/article/store/', newArticle)
 		.then(res => {
-			console.log('Result:', res.data);
 			dispatch({
 				type: POST_ARTICLE,
 				payload: res.data,
@@ -45,7 +43,6 @@ export const addArticle = (newArticle, history) => dispatch => {
 			// dispatch(clearErrors());
 		})
 		.catch(err => {
-			console.log('error:', err.response);
 			dispatch({
 				type: SET_ERRORS,
 				payload: err.response,
@@ -57,11 +54,9 @@ export const updateArticle = (updateData, history) => dispatch => {
 	axios.defaults.headers.common['Authorization'] =
 		'Token 60756d77ba57d8de4ba99f2af2d4d04bb25cbb05';
 	dispatch({ type: LOADING_UI });
-	console.log('dddddzzz', updateData);
 	axios
 		.post('http://api.nurc.bict.rw/article/update/', updateData)
 		.then(res => {
-			console.log('resultz', res.data);
 			dispatch({
 				type: POST_ARTICLE,
 				payload: res.data,
@@ -88,14 +83,13 @@ export const deleteArticle = articleId => dispatch => {
 		.catch(err => console.log(err));
 };
 
-export const changeArticleStatus = (articleId, history) => dispatch => {
+export const changeArticleStatus = (articleId) => dispatch => {
 	axios.defaults.headers.common['Authorization'] =
 		'Token e81989f716e5d3068c90e98cf5af38851867b75f';
 	axios
 		.post('http://api.nurc.bict.rw/article/status/', articleId)
 		.then(res => {
-			history.push('/articles');
-			dispatch({ type: CHANGE_ARTICLE_STATUS, payload: articleId.id });
+			dispatch({ type: CHANGE_ARTICLE_STATUS, payload: res.data });
 		})
 		.catch(err => console.log(err));
 };
@@ -237,14 +231,13 @@ export const relatedArticles = categoryId => dispatch => {
 		});
 };
 
-export const changeCommentStatus = (articleId, history) => dispatch => {
+export const changeCommentStatus = (articleId) => dispatch => {
 	axios.defaults.headers.common['Authorization'] =
 		'Token e81989f716e5d3068c90e98cf5af38851867b75f';
 	axios
 		.post('http://api.nurc.bict.rw/article/comment/status/', articleId)
 		.then(res => {
-			history.push('/comments');
-			dispatch({ type: SET_COMMENT, payload: articleId.id });
+			dispatch({ type: SET_COMMENT, payload: res.data });
 		})
 		.catch(err => console.log(err));
 };

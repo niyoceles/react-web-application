@@ -22,7 +22,6 @@ class AddComment extends Component {
 	handleAddComment = event => {
 		event.preventDefault();
 		const { name, email, message } = this.state;
-		const { comment } = this.props.article;
 		const commentData = {
 			name,
 			email,

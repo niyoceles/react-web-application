@@ -13,8 +13,7 @@ import {
 	getArticleViews,
 	relatedArticles
 } from '../../redux/actions';
-
-import './css/article.css';
+import '../admin/article/css/article.css';
 import AddComment from '../../components/Comments/AddComment';
 import ViewComments from '../../components/Comments/ViewComments';
 import RelatedArticles from '../../components/Articles/RelatedArticles';
@@ -54,6 +53,7 @@ class ReadArticleScreen extends Component {
 										src={`${file}?auto=compress&cs=tinysrgb&dpr=1&w=500`}
 										frameBorder='0'
 										scrolling='no'
+										title={title}
 										autoplay='false'
 										style={{
 											width: '100%',
@@ -70,7 +70,7 @@ class ReadArticleScreen extends Component {
 							<hr />
 							<AddComment articleId={id} />
 							<hr />
-							<ViewComments articleId={id} />
+							<ViewComments articleId={this.props.article.readArticle.id} />
 						</Col>
 						<RelatedArticles categoryId={category}/>
 					</Row>

@@ -3,7 +3,6 @@ import React, { Component, Fragment } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
-import Upload from '../../helpers/upload/Upload';
 import Button from 'react-bootstrap/Button';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-inline';
@@ -106,10 +105,11 @@ class UpdateArticle extends Component {
 	};
 
 	render() {
-		const { open, category, title, text, uploadPercentage, file } = this.state;
+		const { open, category, title, text, uploadPercentage } = this.state;
 		return (
 			<Fragment>
 				<a
+					href={() => false}
 					onClick={this.handleOpen}
 					className='btn btn-primary btn-sm mr-2 small'>
 					<i className='fa fa-edit'></i>
@@ -142,6 +142,7 @@ class UpdateArticle extends Component {
 										src={`${this.props.contentFile}?auto=compress&cs=tinysrgb&dpr=1&w=500`}
 										frameBorder='0'
 										scrolling='no'
+										title={title}
 										autoplay='false'
 										style={{
 											width: '100%',

@@ -17,6 +17,7 @@ export class Articles extends Component {
 						className='mr-3'
 						src={`${file}?auto=compress&cs=tinysrgb&dpr=1&w=500`}
 						frameBorder='0'
+						title={title}
 						scrolling='no'
 						autoplay='false'
 						style={{

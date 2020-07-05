@@ -56,7 +56,6 @@ class CreateArticle extends Component {
 		data.append('timestamp', (Date.now() / 1000) | 0);
 
 		let type = files[0].type.split('/');
-		console.log('type', type[0]);
 
 		if (type[0] === 'video') {
 			this.setState({
@@ -99,7 +98,7 @@ class CreateArticle extends Component {
 	};
 
 	render() {
-		const { category, title, text, uploadPercentage, file } = this.state;
+		const { category, title, text, uploadPercentage } = this.state;
 		return (
 			<AdminLayout>
 				<form
