@@ -9,17 +9,25 @@ import {
 	GET_COMMENTS,
 	ADD_VIEW,
 	GET_VIEWS,
+	SEARCH_ARTICLES,
+	RELATED_ARTICLES,
+	NO_FOUND,
+	GET_ALL_COMMENTS,
+	SET_COMMENT
 } from '../types';
 
 const initialState = {
 	articles: [],
 	comments: [],
+	allComments: [],
 	comment: [],
 	view: {},
 	views: [],
 	article: {},
 	readArticle: {},
 	readArticles: [],
+	relatedArticles: [],
+	searchArticles: null,
 	loading: false,
 };
 
@@ -80,6 +88,31 @@ export default function (state = initialState, action) {
 			return {
 				...state,
 				views: action.payload,
+			};
+		case RELATED_ARTICLES:
+			return {
+				...state,
+				relatedArticles: action.payload,
+			};
+		case SEARCH_ARTICLES:
+			return {
+				...state,
+				searchArticles: action.payload,
+			};
+		case NO_FOUND:
+			return {
+				...state,
+				searchArticles: action.payload,
+			};
+		case GET_ALL_COMMENTS:
+			return {
+				...state,
+				allComments: action.payload,
+			};
+		case SET_COMMENT:
+			return {
+				...state,
+				comment: action.payload,
 			};
 		default:
 			return state;

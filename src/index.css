@@ -123,3 +123,12 @@ p.small {
 .error ul li {
 	font-size: 12px;
 }
+
+.profile-pic-uploader{
+height: 50px;
+padding:10px
+}
+
+.fa {
+	color:#fff
+}

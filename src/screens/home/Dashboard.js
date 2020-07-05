@@ -40,6 +40,15 @@ export class DashboardScreen extends React.Component {
 							<p className='card-text'>10</p>
 						</div>
 					</a>
+					<a
+					href='/comments'
+					className='card mb-3 col-sm-3 col-md-3 col-xs-12 text-center'>
+					<div className='card-body text-white bg-success rounded'>
+						<i className='fa fa-paper-plane' style={{ fontSize: '42px' }}></i>
+						<h5 className='card-title mt-3'>Comments</h5>
+						<p className='card-text'>10</p>
+					</div>
+				</a>
 				</Row>
 			</AdminLayout>
 		);

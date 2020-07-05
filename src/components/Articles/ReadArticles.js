@@ -4,12 +4,8 @@ import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import {
-	Col,
-	Image, Row
+	Col, Row
 } from 'react-bootstrap';
-
-import ReadArticle from './UpdateArticle';
-import { connect } from 'react-redux';
 
 class ReadArticles extends Component {
 	render() {
@@ -56,11 +52,8 @@ class ReadArticles extends Component {
 }
 
 ReadArticles.propTypes = {
-	user: PropTypes.object.isRequired,
+	category: PropTypes.string.isRequired,
+	articles: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = state => ({
-	user: state.user,
-});
-
-export default connect(mapStateToProps)(ReadArticles);
+export default ReadArticles;

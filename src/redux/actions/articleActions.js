@@ -14,6 +14,11 @@ import {
 	GET_COMMENTS,
 	ADD_VIEW,
 	GET_VIEWS,
+	SEARCH_ARTICLES,
+	RELATED_ARTICLES,
+	NO_FOUND,
+	GET_ALL_COMMENTS,
+	SET_COMMENT,
 } from '../types';
 import axios from 'axios';
 import { setAuthorization } from './userActions';
@@ -178,7 +183,6 @@ export const viewComments = articleId => dispatch => {
 		.catch(err => console.log(err.response));
 };
 
-
 // COUNT VIEW ARTICLE
 export const countViewArticle = articleId => dispatch => {
 	axios
@@ -197,4 +201,70 @@ export const getArticleViews = articleId => dispatch => {
 			dispatch({ type: GET_VIEWS, payload: res.data });
 		})
 		.catch(err => console.log(err.response));
+};
+
+export const searchArticles = searchItem => dispatch => {
+	axios
+		.get(`http://api.nurc.bict.rw/article/search/${searchItem}`)
+		.then(res => {
+			dispatch({
+				type: SEARCH_ARTICLES,
+				payload: res.data,
+			});
+		})
+		.catch(err => {
+			dispatch({
+				type: NO_FOUND,
+				payload: null,
+			});
+		});
+};
+
+export const relatedArticles = categoryId => dispatch => {
+	axios
+		.get(`http://api.nurc.bict.rw/article/related/${categoryId}`)
+		.then(res => {
+			dispatch({
+				type: RELATED_ARTICLES,
+				payload: res.data,
+			});
+		})
+		.catch(err => {
+			dispatch({
+				type: SET_ERRORS,
+				payload: [],
+			});
+		});
+};
+
+export const changeCommentStatus = (articleId, history) => dispatch => {
+	axios.defaults.headers.common['Authorization'] =
+		'Token e81989f716e5d3068c90e98cf5af38851867b75f';
+	axios
+		.post('http://api.nurc.bict.rw/article/comment/status/', articleId)
+		.then(res => {
+			history.push('/comments');
+			dispatch({ type: SET_COMMENT, payload: articleId.id });
+		})
+		.catch(err => console.log(err));
+};
+
+export const getComments = () => dispatch => {
+	dispatch({ type: LOADING_DATA });
+	axios.defaults.headers.common['Authorization'] =
+		'Token 60756d77ba57d8de4ba99f2af2d4d04bb25cbb05';
+	axios
+		.get('http://api.nurc.bict.rw/article/comment/all/')
+		.then(res => {
+			dispatch({
+				type: GET_ALL_COMMENTS,
+				payload: res.data,
+			});
+		})
+		.catch(err => {
+			dispatch({
+				type: SET_ERRORS,
+				payload: [],
+			});
+		});
 };
