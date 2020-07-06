@@ -23,7 +23,6 @@ export const loginUser = (userData, history) => dispatch => {
 	axios
 		.post('http://api.nurc.bict.rw/login/', userData)
 		.then(res => {
-			console.log('login:', res.data);
 			const { token, role } = res.data;
 			setAuthorization(token, role);
 			// dispatch(getUserData());
@@ -39,11 +38,9 @@ export const sendAnInvite = (sendInviteData, history) => dispatch => {
 	axios.defaults.headers.common['Authorization'] =
 		'Token e81989f716e5d3068c90e98cf5af38851867b75f';
 	dispatch({ type: LOADING_UI });
-	console.log('data', sendInviteData);
 	axios
 		.post('http://api.nurc.bict.rw/register/', sendInviteData)
 		.then(res => {
-			console.log('my data', res.data);
 			history.push('/dashboard');
 			dispatch({ type: CLEAR_ERRORS });
 			dispatch({ type: SEND_INVITE, payload: res.data });

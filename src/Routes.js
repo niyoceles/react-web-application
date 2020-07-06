@@ -1,18 +1,17 @@
-import React, { Fragment, Component } from 'react';
+import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import {
 	ForgotPasswordScreen,
 	ResetPasswordScreen,
-	DashboardScreen,
 	CategoryScreen,
 } from './screens';
+import DashboardScreen from './screens/admin/Dashboard';
 import LandingPageScreen from './screens/home/LandingPage';
-import ManageArticlesScreen from './screens/article/ManageArticles';
-import ManageCommentsScreen from './screens/comment/ManageComments';
-import ReadArticleScreen from './screens/article/ReadArticle';
+import ManageArticlesScreen from './screens/admin/article/ManageArticles';
+import ManageCommentsScreen from './screens/admin/comment/ManageComments';
+import ReadArticleScreen from './screens/home/ReadArticle';
 import SetPasswordScreen from './screens/auth/password/set';
 import LoginScreen from './screens/auth/LoginScreen';
-import Home from './pages/Home.jsx';
 import CreateArticle from './components/Articles/CreateArticle';
 import ManageUsersPage from './pages/ManageUsersPage';
 

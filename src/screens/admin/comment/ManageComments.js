@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col, Button, Table } from 'react-bootstrap';
+import { Row, Col, Table, Button } from 'react-bootstrap';
 import Skeleton from 'react-loading-skeleton';
-import ManageComments from '../../components/Comments/ManageComments';
-import AdminLayout from '../../layouts/AdminLayout';
+import ManageComments from '../../../components/Comments/ManageComments';
+import AdminLayout from '../../../layouts/AdminLayout';
 import { connect } from 'react-redux';
-import { getComments } from '../../redux/actions';
+import { getComments } from '../../../redux/actions';
 
 class ManageCommentsScreen extends Component {
 	componentDidMount() {
@@ -25,6 +25,11 @@ class ManageCommentsScreen extends Component {
 				<Row className='mt-5'>
 					<Col sm={8}>
 						<h4>Comments </h4>
+					</Col>
+					<Col sm={2}>
+						<Button href='/dashboard' variant='secondary btn-block mb-2'>
+							Go back
+						</Button>
 					</Col>
 				</Row>
 				<Row className='admin-box mt-4'>

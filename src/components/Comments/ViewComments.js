@@ -1,13 +1,8 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component} from 'react';
 import PropTypes from 'prop-types';
 import {
 	Row,
-	Container,
 	Col,
-	Form,
-	Button,
-	Image,
-	Media,
 } from 'react-bootstrap';
 import Skeleton from 'react-loading-skeleton';
 import { connect } from 'react-redux';
@@ -19,13 +14,16 @@ class ViewComments extends Component {
     allcomments: null,
   }
 	componentDidMount() {
-		const data = { article: this.props.articleId };
+		const lastPath = window.location.pathname;
+		var articleSlugId = lastPath.split('/');
+		const data = {
+			article: articleSlugId[2],
+		};
 		this.props.viewComments(data);
   }
   
   componentWillReceiveProps(nextProps) {
 		if (nextProps.article.comments !== null) {
-			console.log('vvppppvvv', nextProps.article.comments);
 			this.setState({
 				allcomments: nextProps.article.comments,
 			});
@@ -36,7 +34,7 @@ class ViewComments extends Component {
     const { comments } = this.props.article;
     const {allcomments} = this.state;
     const numberComments = comments.length;
-    let landingArticles = allcomments ? (
+    let landingComents = allcomments ? (
 			allcomments.map(commentItem => (
 				<Comments key={commentItem.id} commentItem={commentItem} />
 			))
@@ -47,7 +45,7 @@ class ViewComments extends Component {
 			<Row className='comments'>
 				<Col sm={10}>
 					{numberComments} Comments
-					{landingArticles}
+					{landingComents}
 				</Col>
 			</Row>
 		);
