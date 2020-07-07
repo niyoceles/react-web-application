@@ -4,9 +4,9 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
 import { connect } from 'react-redux';
-import { deleteArticle } from '../../redux/actions';
+import { deleteCategory } from '../../../redux/actions';
 
-class DeleteArticle extends Component {
+class DeleteCategory extends Component {
 	state = {
 		open: false,
 	};
@@ -18,12 +18,21 @@ class DeleteArticle extends Component {
 		this.setState({ open: false });
 	};
 
-	deleteArticle = () => {
-		const deleteData = { id: this.props.articleId };
-		this.props.deleteArticle(deleteData);
+	deleteCategory = () => {
+		const deleteData = { id: this.props.categoryId };
+		this.props.deleteCategory(deleteData);
 		this.setState({ open: false });
 	};
+
+	// refreshPage = () => {
+	// 	window.location.reload(false);
+	// };
+
 	render() {
+		// console.log('categoryDelete:', this.props.article.category)
+		// if (this.props.article.category.id === this.props.categoryId) {
+		// 	this.refreshPage();
+		// }
 		return (
 			<Fragment>
 				<a
@@ -32,22 +41,21 @@ class DeleteArticle extends Component {
 					className='btn btn-danger btn-sm small'>
 					<i className='fa fa-trash'></i>
 				</a>
-				<Modal show={this.state.open} onHide={this.handleClose} size='lg'>
+				<Modal show={this.state.open} onHide={this.handleClose} size='md'>
 					<Modal.Header closeButton>
 						<Modal.Title id='contained-modal-title-vcenter'>
-							Delete article
+							Delete Category
 						</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
-						<h4>Are you sure to delete this article</h4>
-						Article name: {this.props.articleName} <br />
-						Written by:{this.props.userNames}
+						<h4>Are you sure to delete this category</h4>
+						Category name: {this.props.categoryName}
 					</Modal.Body>
 					<Modal.Footer>
 						<Button color='secondary' onClick={this.handleClose}>
 							Close
 						</Button>
-						<Button color='primary' onClick={this.deleteArticle}>
+						<Button color='primary' onClick={this.deleteCategory}>
 							Save changes
 						</Button>
 					</Modal.Footer>
@@ -57,9 +65,12 @@ class DeleteArticle extends Component {
 	}
 }
 
-DeleteArticle.propTypes = {
-	deleteArticle: PropTypes.func.isRequired,
-	articleId: PropTypes.number.isRequired,
+DeleteCategory.propTypes = {
+	deleteCategory: PropTypes.func.isRequired,
+	categoryId: PropTypes.string.isRequired,
 };
 
-export default connect(null, { deleteArticle })(DeleteArticle);
+const mapStateToProps = state => ({
+	article: state.article,
+});
+export default connect(mapStateToProps, { deleteCategory })(DeleteCategory);

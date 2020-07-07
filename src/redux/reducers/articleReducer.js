@@ -14,7 +14,11 @@ import {
 	RELATED_ARTICLES,
 	NO_FOUND,
 	GET_ALL_COMMENTS,
-	SET_COMMENT
+	SET_COMMENT,
+	GET_CATEGORIES,
+	ADD_CATEGORY,
+	UPDATE_CATEGORY,
+	DELETE_CATEGORY,
 } from '../types';
 
 const initialState = {
@@ -30,6 +34,8 @@ const initialState = {
 	relatedArticles: [],
 	searchArticles: null,
 	loading: false,
+	categories: [],
+	category: {},
 };
 
 export default function (state = initialState, action) {
@@ -119,6 +125,26 @@ export default function (state = initialState, action) {
 			return {
 				...state,
 				article: action.payload,
+			};
+		case GET_CATEGORIES:
+			return {
+				...state,
+				categories: action.payload,
+			};
+		case ADD_CATEGORY:
+			return {
+				...state,
+				categories: [action.payload, ...state.categories],
+			};
+		case UPDATE_CATEGORY:
+			return {
+				...state,
+				category: action.payload,
+			};
+		case DELETE_CATEGORY:
+			return {
+				...state,
+				category: action.payload,
 			};
 		default:
 			return state;

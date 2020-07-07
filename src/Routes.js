@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import {
 	ForgotPasswordScreen,
 	ResetPasswordScreen,
-	CategoryScreen,
 } from './screens';
+import CategoryScreen from './screens/admin/category/CategoriesScreen';
 import DashboardScreen from './screens/admin/Dashboard';
 import LandingPageScreen from './screens/home/LandingPage';
 import ManageArticlesScreen from './screens/admin/article/ManageArticles';
