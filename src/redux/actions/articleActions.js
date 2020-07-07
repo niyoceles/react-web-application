@@ -19,6 +19,10 @@ import {
 	NO_FOUND,
 	GET_ALL_COMMENTS,
 	SET_COMMENT,
+	GET_CATEGORIES,
+	ADD_CATEGORY,
+	UPDATE_CATEGORY,
+	DELETE_CATEGORY,
 } from '../types';
 import axios from 'axios';
 import { setAuthorization } from './userActions';
@@ -83,7 +87,7 @@ export const deleteArticle = articleId => dispatch => {
 		.catch(err => console.log(err));
 };
 
-export const changeArticleStatus = (articleId) => dispatch => {
+export const changeArticleStatus = articleId => dispatch => {
 	axios.defaults.headers.common['Authorization'] =
 		'Token e81989f716e5d3068c90e98cf5af38851867b75f';
 	axios
@@ -231,7 +235,7 @@ export const relatedArticles = categoryId => dispatch => {
 		});
 };
 
-export const changeCommentStatus = (articleId) => dispatch => {
+export const changeCommentStatus = articleId => dispatch => {
 	axios.defaults.headers.common['Authorization'] =
 		'Token e81989f716e5d3068c90e98cf5af38851867b75f';
 	axios
@@ -260,4 +264,78 @@ export const getComments = () => dispatch => {
 				payload: [],
 			});
 		});
+};
+
+// Category
+export const getCategories = () => dispatch => {
+	dispatch({ type: LOADING_DATA });
+	axios.defaults.headers.common['Authorization'] =
+		'Token e81989f716e5d3068c90e98cf5af38851867b75f';
+	axios
+		.get('http://api.nurc.bict.rw/category/')
+		.then(res => {
+			dispatch({
+				type: GET_CATEGORIES,
+				payload: res.data,
+			});
+		})
+		.catch(err => {
+			dispatch({
+				type: SET_ERRORS,
+				payload: [],
+			});
+		});
+};
+
+export const addCategory = newData => dispatch => {
+	axios.defaults.headers.common['Authorization'] =
+		'Token e81989f716e5d3068c90e98cf5af38851867b75f';
+	dispatch({ type: LOADING_UI });
+	axios
+		.post('http://api.nurc.bict.rw/category/store/', newData)
+		.then(res => {
+			dispatch({
+				type: ADD_CATEGORY,
+				payload: res.data,
+			});
+			// dispatch(clearErrors());
+		})
+		.catch(err => {
+			console.log('error:', err.response);
+			dispatch({
+				type: SET_ERRORS,
+				payload: err.response,
+			});
+		});
+};
+
+export const updateCategory = (updateData, history) => dispatch => {
+	axios.defaults.headers.common['Authorization'] =
+		'Token e81989f716e5d3068c90e98cf5af38851867b75f';
+	dispatch({ type: LOADING_UI });
+	axios
+		.post('http://api.nurc.bict.rw/category/update/', updateData)
+		.then(res => {
+			dispatch({
+				type: UPDATE_CATEGORY,
+				payload: res.data,
+			});
+		})
+		.catch(err => {
+			dispatch({
+				type: SET_ERRORS,
+				payload: err.response,
+			});
+		});
+};
+
+export const deleteCategory = articleId => dispatch => {
+	axios.defaults.headers.common['Authorization'] =
+		'Token e81989f716e5d3068c90e98cf5af38851867b75f';
+	axios
+		.post('http://api.nurc.bict.rw/category/delete/', articleId)
+		.then(res => {
+			dispatch({ type: DELETE_CATEGORY, payload: res.data });
+		})
+		.catch(err => console.log(err.response));
 };
